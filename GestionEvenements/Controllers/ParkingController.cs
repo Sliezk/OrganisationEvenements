@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace OrganisationEvenements.Controllers
+namespace GestionEvenements.Controllers
 {
     public class ParkingController : Controller
     {
