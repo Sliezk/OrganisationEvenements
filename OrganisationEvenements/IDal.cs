@@ -11,6 +11,7 @@ namespace OrganisationEvenements
     {
 
         List<Evenement> GetListEvents();
+        void CreerEvenement()
 
     }
 }
