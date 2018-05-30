@@ -178,6 +178,7 @@
     <Compile Include="BddContext.cs" />
     <Compile Include="Controllers\EvenementController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ParkingController.cs" />
     <Compile Include="Dal.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -227,6 +228,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Evenement\" />
+    <Folder Include="Views\Parking\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
