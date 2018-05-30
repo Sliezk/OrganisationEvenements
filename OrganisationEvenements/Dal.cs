@@ -21,6 +21,12 @@ namespace OrganisationEvenements
             return bdd.Evenements.ToList();
         }
 
+        public void CreerEvenement(string lieu, DateTime date, int duree, string theme)
+        {
+            bdd.Evenements.Add(new Evenement { Lieu = lieu, Date = date, Duree = duree, Theme = theme });
+            bdd.SaveChanges();
+        }
+
         public void Dispose()
         {
             bdd.Dispose();

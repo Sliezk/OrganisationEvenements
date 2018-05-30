@@ -12,6 +12,15 @@ namespace OrganisationEvenements.Models
         {
         }
 
+        public Evenement(Guid id, string lieu, DateTime date, int duree, string theme) : this()
+        {
+            this.ID = id;
+            this.Lieu = lieu;
+            this.Date = date;
+            this.Duree = duree;
+            this.Theme = theme;
+        }
+
         public Evenement(Guid id, string lieu, DateTime date, int duree, string theme, string image) : this()
         {
             this.ID = id;
