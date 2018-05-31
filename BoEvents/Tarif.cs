@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BoEvents
 {
-    class Tarif
+    public class Tarif
     {
         public Guid ID { get; set; }
 

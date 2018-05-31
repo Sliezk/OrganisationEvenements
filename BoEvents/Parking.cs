@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BoEvents
 {
-    class Parking
+    public class Parking : IEntityIdentifiable
     {
         public Guid ID { get; set; }
 
