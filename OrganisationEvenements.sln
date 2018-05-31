@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DalEvents", "DalEvents\DalE
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoEvents", "BoEvents\BoEvents.csproj", "{53A32E33-4D8A-4A9A-A1D6-B9922C1C3FD5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service", "Service\Service.csproj", "{E666D326-386C-4A53-8EDD-5E4CB88A3D37}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{53A32E33-4D8A-4A9A-A1D6-B9922C1C3FD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{53A32E33-4D8A-4A9A-A1D6-B9922C1C3FD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{53A32E33-4D8A-4A9A-A1D6-B9922C1C3FD5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E666D326-386C-4A53-8EDD-5E4CB88A3D37}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E666D326-386C-4A53-8EDD-5E4CB88A3D37}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E666D326-386C-4A53-8EDD-5E4CB88A3D37}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E666D326-386C-4A53-8EDD-5E4CB88A3D37}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

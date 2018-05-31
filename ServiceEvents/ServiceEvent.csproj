@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{53A32E33-4D8A-4A9A-A1D6-B9922C1C3FD5}</ProjectGuid>
+    <ProjectGuid>{F258E301-B537-4976-91AF-8431D2B329BA}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BoEvents</RootNamespace>
-    <AssemblyName>BoEvents</AssemblyName>
+    <RootNamespace>ServiceEvents</RootNamespace>
+    <AssemblyName>ServiceEvents</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -47,12 +47,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Evenement.cs" />
-    <Compile Include="Parking.cs" />
-    <Compile Include="IEntityIdentifiable.cs" />
+    <Compile Include="ServiceEvent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Tarif.cs" />
-    <Compile Include="Utilisateur.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BoEvents\BoEvents.csproj">
+      <Project>{53a32e33-4d8a-4a9a-a1d6-b9922c1c3fd5}</Project>
+      <Name>BoEvents</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DalEvents\DalEvents.csproj">
+      <Project>{76a38417-da7d-45d6-bdaf-0a7a68f177b9}</Project>
+      <Name>DalEvents</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
