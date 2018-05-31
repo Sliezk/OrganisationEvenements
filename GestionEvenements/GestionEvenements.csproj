@@ -198,8 +198,10 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\EvenementViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\ViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -260,9 +262,12 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Evenement\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\EvenementViewModel\" />
+    <Folder Include="Views\ViewModel\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -285,6 +290,10 @@
     <ProjectReference Include="..\DalEvents\DalEvents.csproj">
       <Project>{76a38417-da7d-45d6-bdaf-0a7a68f177b9}</Project>
       <Name>DalEvents</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Service\Service.csproj">
+      <Project>{e666d326-386c-4a53-8edd-5e4cb88a3d37}</Project>
+      <Name>Service</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

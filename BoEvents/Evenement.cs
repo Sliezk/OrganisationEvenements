@@ -5,16 +5,17 @@ using System.Web;
 
 namespace BoEvents
 {
-    public class Evenement
+    public class Evenement : IEntityIdentifiable
     {
 
         public Evenement()
         {
+            this.ID = Guid.NewGuid();
         }
 
-        public Evenement(Guid id, string lieu, DateTime date, int duree, string theme) : this()
+        public Evenement(string lieu, DateTime date, int duree, string theme) : this()
         {
-            this.ID = id;
+            this.ID = Guid.NewGuid();
             this.Lieu = lieu;
             this.Date = date;
             this.Duree = duree;
@@ -23,7 +24,7 @@ namespace BoEvents
 
         public Evenement(Guid id, string lieu, DateTime date, int duree, string theme, string image) : this()
         {
-            this.ID = id;
+            this.ID = Guid.NewGuid();
             this.Lieu = lieu;
             this.Date = date;
             this.Duree = duree;
