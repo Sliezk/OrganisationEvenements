@@ -1,0 +1,48 @@
+﻿@model IEnumerable<GestionEvenements.Models.ParkingViewModel>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nom)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Lieu)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NbPlacesLibres)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Capacite)
+        </th>
+        <th>
+            Tarif en vigueur
+        </th>
+        <th>
+            Coût estimé
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nom)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Lieu)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NbPlacesLibres)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Capacite)
+        </td>
+        <td>
+            @ViewBag.Tarif
+        </td>
+        <td>
+            @ViewBag.Cout
+        </td>
+    </tr>
+}
+
+</table>
