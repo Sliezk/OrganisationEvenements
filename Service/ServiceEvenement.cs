@@ -2,6 +2,7 @@
 using DalEvents;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 
 namespace Service
@@ -33,10 +34,16 @@ namespace Service
             Evenement retour = null;
             using (BddContext context = new BddContext())
             {
-                retour = context.Evenements.FirstOrDefault(l => l.ID == id);
+                retour = context.Evenements.FirstOrDefault(e => e.ID == id);
 
             }
             return retour;
+        }
+
+        //surcharge, on la met en private car utilisée uniquement par le service
+        private static Evenement Get(Guid id, BddContext context)
+        {
+            return context.Evenements.FirstOrDefault(e => e.ID == id);
         }
 
         public static void Insert(Evenement e)
@@ -47,21 +54,21 @@ namespace Service
                 context.SaveChanges();
             }
         }
-
-        /* TODO
+        
         public static void Update(Evenement e)
         {
             using (BddContext context = new BddContext())
             {
                 EntityState s = context.Entry(e).State;
-                Evenement lExistant = context.Livres.FirstOrDefault();
-                lExistant.Titre = l.Titre;
-                lExistant.Resume = l.Resume;
-                lExistant.NBPages = l.NBPages;
-                lExistant.Prix = l.Prix;
+                Evenement eExistant = Get(e.ID, context);
+                eExistant.Nom = e.Nom;
+                eExistant.Lieu = e.Lieu;
+                eExistant.Duree = e.Duree;
+                eExistant.Theme = e.Theme;
+                eExistant.Date = e.Date;
 
                 context.SaveChanges();
             }
-        }*/
+        }
     }
 }

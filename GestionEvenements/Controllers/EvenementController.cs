@@ -1,4 +1,6 @@
-﻿using GestionEvenements.Models;
+﻿using BoEvents;
+using GestionEvenements.Models;
+using Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,55 +14,44 @@ namespace GestionEvenements.Controllers
         // GET: Evenement
         public ActionResult Index()
         {
-            return View(EvenementViewModel.GetAll());
+            List<EvenementViewModel> listes = new List<EvenementViewModel>();
+
+
+            List<Evenement> evenements = ServiceEvenement.GetAll();
+            foreach (Evenement ev in evenements)
+            {
+                listes.Add(new EvenementViewModel(ev));
+            }
+
+            return View(listes);
         }
 
         // GET: Evenement/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(Guid id)
         {
-            return View();
-        }
-
-        // GET: Evenement/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Evenement/Create
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            EvenementViewModel EVM = new EvenementViewModel(ServiceEvenement.GetAll().FirstOrDefault(e => e.ID == id));
+            return View(EVM);
         }
 
         // GET: Evenement/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(Guid? id)
         {
-            return View();
+            return View(EvenementViewModel.Get(id));
         }
 
         // POST: Evenement/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(EvenementViewModel EVM)
         {
             try
             {
-                // TODO: Add update logic here
-
+                EVM.Save();
                 return RedirectToAction("Index");
             }
-            catch
+            catch (Exception e)
             {
+                Console.WriteLine(e.Message);
+                Console.ReadKey();
                 return View();
             }
         }

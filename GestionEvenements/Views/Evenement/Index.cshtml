@@ -1,16 +1,19 @@
 ﻿@model IEnumerable<GestionEvenements.Models.EvenementViewModel>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Evenements";
 }
 
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "Edit")
 </p>
 <table class="table">
     <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nom)
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.Lieu)
         </th>
@@ -28,6 +31,9 @@
 
 @foreach (var item in Model) {
     <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nom)
+        </td>
         <td>
             @Html.DisplayFor(modelItem => item.Lieu)
         </td>

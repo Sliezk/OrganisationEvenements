@@ -17,53 +17,34 @@ namespace GestionEvenements.Models
 
         }
 
+        public string Nom
+        {
+            get {return this.Metier.Nom;}
+            set {Metier.Nom = value;}
+        }
 
         public string Lieu
         {
-            get
-            {
-                return this.Metier.Lieu;
-            }
-            set
-            {
-                this.Metier.Lieu = value;
-            }
+            get {return this.Metier.Lieu;}
+            set {Metier.Lieu = value;}
         }
 
         public DateTime Date
         {
-            get
-            {
-                return this.Metier.Date;
-            }
-            set
-            {
-                this.Metier.Date = value;
-            }
+            get {return this.Metier.Date;}
+            set {Metier.Date = value;}
         }
 
         public int Duree
         {
-            get
-            {
-                return this.Metier.Duree;
-            }
-            set
-            {
-                this.Metier.Duree = value;
-            }
+            get {return this.Metier.Duree;}
+            set {Metier.Duree = value;}
         }
 
         public string Theme
         {
-            get
-            {
-                return this.Metier.Theme;
-            }
-            set
-            {
-                this.Metier.Theme = value;
-            }
+            get {return this.Metier.Theme;}
+            set {Metier.Theme = value;}
         }
 
 
@@ -72,11 +53,13 @@ namespace GestionEvenements.Models
             if (this.ID == Guid.Empty)
             {
                 //insert
+                this.ID = Guid.NewGuid();
                 ServiceEvenement.Insert(this.Metier);
             }
             else
             {
                 //update
+                ServiceEvenement.Update(this.Metier);
             }
         }
 
@@ -112,8 +95,8 @@ namespace GestionEvenements.Models
             }
             else
             {
-                Evenement l = new Evenement() { ID = Guid.Empty, Lieu = "Default" };
-                retour = new EvenementViewModel(l);
+                Evenement e = new Evenement() { ID = Guid.Empty, Nom = "Default", Lieu = "Default", Theme = "Default" };
+                retour = new EvenementViewModel(e);
             }
 
             return retour;

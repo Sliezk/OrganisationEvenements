@@ -16,9 +16,12 @@
         public BddContext()
             : base("name=BddContext")
         {
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<BddContext, DalEvents.Migrations.Configuration>());
         }
         
         public DbSet<Evenement> Evenements { get; set; }
+
+        // public System.Data.Entity.DbSet<GestionEvenements.Models.EvenementViewModel> EvenementViewModels { get; set; }
 
         // Ajoutez un DbSet pour chaque type d'entité à inclure dans votre modèle. Pour plus d'informations 
         // sur la configuration et l'utilisation du modèle Code First, consultez http://go.microsoft.com/fwlink/?LinkId=390109.

@@ -10,29 +10,22 @@ namespace BoEvents
 
         public Evenement()
         {
-            this.ID = Guid.NewGuid();
+
         }
 
-        public Evenement(string lieu, DateTime date, int duree, string theme) : this()
+        public Evenement(Guid id, string nom, string lieu, DateTime date, int duree, string theme) : this()
         {
-            this.ID = Guid.NewGuid();
-            this.Lieu = lieu;
-            this.Date = date;
-            this.Duree = duree;
-            this.Theme = theme;
-        }
-
-        public Evenement(Guid id, string lieu, DateTime date, int duree, string theme, string image) : this()
-        {
-            this.ID = Guid.NewGuid();
-            this.Lieu = lieu;
-            this.Date = date;
-            this.Duree = duree;
-            this.Theme = theme;
-            this.Image = image;
+            ID = id;
+            Nom = nom;
+            Lieu = lieu;
+            Date = date;
+            Duree = duree;
+            Theme = theme;
         }
 
         public Guid ID { get; set; }
+
+        public string Nom { get; set; }
 
         public string Lieu { get; set; }
 
@@ -40,9 +33,7 @@ namespace BoEvents
 
         public int Duree { get; set; }
 
-        public string Theme { get; set; }
-
-        public string Image { get; set; }
+        public string Theme { get; set; }        
 
     }
 }

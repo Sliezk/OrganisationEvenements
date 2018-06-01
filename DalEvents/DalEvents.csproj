@@ -50,8 +50,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BddContext.cs" />
-    <Compile Include="Dal.cs" />
-    <Compile Include="IDal.cs" />
+    <Compile Include="Migrations\201805301506559_InitialCreate.cs" />
+    <Compile Include="Migrations\201805301506559_InitialCreate.Designer.cs">
+      <DependentUpon>201805301506559_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806010723110_ajoutNomEvent.cs" />
+    <Compile Include="Migrations\201806010723110_ajoutNomEvent.Designer.cs">
+      <DependentUpon>201806010723110_ajoutNomEvent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806011017534_DeleteAttributImage.cs" />
+    <Compile Include="Migrations\201806011017534_DeleteAttributImage.Designer.cs">
+      <DependentUpon>201806011017534_DeleteAttributImage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -63,6 +74,17 @@
       <Project>{53a32e33-4d8a-4a9a-a1d6-b9922c1c3fd5}</Project>
       <Name>BoEvents</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201805301506559_InitialCreate.resx">
+      <DependentUpon>201805301506559_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806010723110_ajoutNomEvent.resx">
+      <DependentUpon>201806010723110_ajoutNomEvent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806011017534_DeleteAttributImage.resx">
+      <DependentUpon>201806011017534_DeleteAttributImage.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
