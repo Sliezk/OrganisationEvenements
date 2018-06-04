@@ -41,10 +41,16 @@ namespace GestionEvenements.Models
             set {Metier.Duree = value;}
         }
 
-        public string Theme
+        public Theme Theme
         {
-            get {return this.Metier.Theme;}
-            set {Metier.Theme = value;}
+            get { return this.Metier.Theme; }
+            set { Metier.Theme = value; }
+        }
+
+        public string Description
+        {
+            get { return this.Metier.Description; }
+            set { Metier.Description = value; }
         }
 
 
@@ -77,14 +83,6 @@ namespace GestionEvenements.Models
             return retour;
         }
 
-
-
-        /// <summary>
-        /// retourne un livre ViewModel
-        /// </summary>
-        /// <param name="id">Identifiant nullable du livre</param>
-        /// <returns>si id null, retourne un viewModel avec un livre initialisé; Si id a une valeur retourne le viewModel avec le livre en BDD
-        /// </returns>
         public static EvenementViewModel Get(Guid? id)
         {
             EvenementViewModel retour = null;
@@ -95,7 +93,7 @@ namespace GestionEvenements.Models
             }
             else
             {
-                Evenement e = new Evenement() { ID = Guid.Empty, Nom = "Default", Lieu = "Default", Theme = "Default" };
+                Evenement e = new Evenement() { ID = Guid.Empty, Nom = "Default", Lieu = "Default" };
                 retour = new EvenementViewModel(e);
             }
 

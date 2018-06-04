@@ -12,15 +12,23 @@ namespace GestionEvenements.Controllers
     public class EvenementController : Controller
     {
         // GET: Evenement
+        [Authorize(Roles = "Admin")]
         public ActionResult Index()
         {
             List<EvenementViewModel> listes = new List<EvenementViewModel>();
+            List<Theme> listeThemes = new List<Theme>();
 
 
             List<Evenement> evenements = ServiceEvenement.GetAll();
             foreach (Evenement ev in evenements)
             {
                 listes.Add(new EvenementViewModel(ev));
+            }
+
+            List<Theme> themes = ServiceTheme.GetAll();
+            foreach (Theme th in themes)
+            {
+                listeThemes.Add(th);
             }
 
             return View(listes);
@@ -36,6 +44,12 @@ namespace GestionEvenements.Controllers
         // GET: Evenement/Edit/5
         public ActionResult Edit(Guid? id)
         {
+            List<Theme> listeThemes = new List<Theme>();
+            foreach (Theme th in ServiceTheme.GetAll())
+            {
+                listeThemes.Add(th);
+            }
+            ViewBag.ListeThemes = listeThemes;
             return View(EvenementViewModel.Get(id));
         }
 

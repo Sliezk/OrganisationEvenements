@@ -13,7 +13,7 @@ namespace BoEvents
 
         }
 
-        public Evenement(Guid id, string nom, string lieu, DateTime date, int duree, string theme) : this()
+        public Evenement(Guid id, string nom, string lieu, DateTime date, int duree, Theme theme, string description) : this()
         {
             ID = id;
             Nom = nom;
@@ -21,6 +21,7 @@ namespace BoEvents
             Date = date;
             Duree = duree;
             Theme = theme;
+            Description = description;
         }
 
         public Guid ID { get; set; }
@@ -33,7 +34,9 @@ namespace BoEvents
 
         public int Duree { get; set; }
 
-        public string Theme { get; set; }        
+        public Theme Theme { get; set; }        
+
+        public string Description { get; set; }
 
     }
 }

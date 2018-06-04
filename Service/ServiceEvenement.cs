@@ -66,6 +66,7 @@ namespace Service
                 eExistant.Duree = e.Duree;
                 eExistant.Theme = e.Theme;
                 eExistant.Date = e.Date;
+                eExistant.Description = e.Description;
 
                 context.SaveChanges();
             }

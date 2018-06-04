@@ -1,11 +1,12 @@
 ﻿namespace DalEvents
 {
     using BoEvents;
+    using Microsoft.AspNet.Identity.EntityFramework;
     using System;
     using System.Data.Entity;
     using System.Linq;
 
-    public class BddContext : DbContext
+    public class BddContext : IdentityDbContext<ApplicationUser>
     {
         // Votre contexte a été configuré pour utiliser une chaîne de connexion « BddContext » du fichier 
         // de configuration de votre application (App.config ou Web.config). Par défaut, cette chaîne de connexion cible 
@@ -14,14 +15,18 @@
         // Pour cibler une autre base de données et/ou un autre fournisseur de base de données, modifiez 
         // la chaîne de connexion « BddContext » dans le fichier de configuration de l'application.
         public BddContext()
-            : base("name=BddContext")
+            : base("name=BddContext", throwIfV1Schema: false)
         {
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<BddContext, DalEvents.Migrations.Configuration>());
         }
-        
-        public DbSet<Evenement> Evenements { get; set; }
 
-        // public System.Data.Entity.DbSet<GestionEvenements.Models.EvenementViewModel> EvenementViewModels { get; set; }
+        public static BddContext Create()
+        {
+            return new BddContext();
+        }
+
+        public DbSet<Evenement> Evenements { get; set; }
+        public DbSet<Theme> Themes { get; set; }
 
         // Ajoutez un DbSet pour chaque type d'entité à inclure dans votre modèle. Pour plus d'informations 
         // sur la configuration et l'utilisation du modèle Code First, consultez http://go.microsoft.com/fwlink/?LinkId=390109.

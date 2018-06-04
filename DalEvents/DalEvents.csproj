@@ -36,6 +36,12 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -49,6 +55,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationUser.cs" />
     <Compile Include="BddContext.cs" />
     <Compile Include="Migrations\201805301506559_InitialCreate.cs" />
     <Compile Include="Migrations\201805301506559_InitialCreate.Designer.cs">
@@ -61,6 +68,22 @@
     <Compile Include="Migrations\201806011017534_DeleteAttributImage.cs" />
     <Compile Include="Migrations\201806011017534_DeleteAttributImage.Designer.cs">
       <DependentUpon>201806011017534_DeleteAttributImage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806011431572_changementsUsers.cs" />
+    <Compile Include="Migrations\201806011431572_changementsUsers.Designer.cs">
+      <DependentUpon>201806011431572_changementsUsers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806040815469_DescriptionEvent.cs" />
+    <Compile Include="Migrations\201806040815469_DescriptionEvent.Designer.cs">
+      <DependentUpon>201806040815469_DescriptionEvent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806041332540_AjoutThemes.cs" />
+    <Compile Include="Migrations\201806041332540_AjoutThemes.Designer.cs">
+      <DependentUpon>201806041332540_AjoutThemes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806041518337_AjoutThemes2.cs" />
+    <Compile Include="Migrations\201806041518337_AjoutThemes2.Designer.cs">
+      <DependentUpon>201806041518337_AjoutThemes2.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -84,6 +107,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201806011017534_DeleteAttributImage.resx">
       <DependentUpon>201806011017534_DeleteAttributImage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806011431572_changementsUsers.resx">
+      <DependentUpon>201806011431572_changementsUsers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806040815469_DescriptionEvent.resx">
+      <DependentUpon>201806040815469_DescriptionEvent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806041332540_AjoutThemes.resx">
+      <DependentUpon>201806041332540_AjoutThemes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806041518337_AjoutThemes2.resx">
+      <DependentUpon>201806041518337_AjoutThemes2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

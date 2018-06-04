@@ -6,6 +6,23 @@
 
 <h2>Liste des évènements</h2>
 
+<div class="events">
+    @foreach (var item in Model)
+    {
+    <div class="event col-md-4">
+        @Html.ActionLink("" + @Html.DisplayFor(modelItem => item.Nom) + "", "Details", new { id = item.ID })
+        <br />
+        @Html.DisplayFor(modelItem => item.Lieu)
+        <br />
+        @Html.DisplayFor(modelItem => item.Date)
+        <br />
+        @Html.DisplayFor(modelItem => item.Duree)
+        <br />
+        @Html.DisplayFor(modelItem => item.Theme.Nom)
+    </div>
+    }
+    </div>
+
 <table class="table">
     <tr>
         <th>
@@ -18,7 +35,7 @@
             @Html.DisplayNameFor(model => model.Duree)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Theme)
+            @Html.DisplayNameFor(model => model.Theme.Nom)
         </th>
         <th></th>
     </tr>
