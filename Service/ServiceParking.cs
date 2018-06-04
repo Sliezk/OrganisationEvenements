@@ -11,9 +11,172 @@ namespace Service
     {
         public static List<Parking> GetAll()
         {
-            List<Parking> retour = null;
+            List<Parking> retour = new List<Parking>();
+            JsonListeParkings parkings = new JsonListeParkings();
+            parkings = WebServiceParking.getJsonResponse<JsonListeParkings>("http://data.citedia.com/r1/parks", parkings);
 
-            //retour = WebServiceParking.Lister;
+            foreach (Park p in parkings.parks)
+            {
+                Parking parking = new Parking();
+                parking.Nom = p.parkInformation.name;
+                parking.Statut = p.parkInformation.status;
+                parking.Capacite = p.parkInformation.max;
+                parking.NbPlacesLibres = p.parkInformation.free;
+                retour.Add(parking);
+            }
+
+            foreach (Feature f in parkings.features.features)
+            {
+                switch (f.id){
+                    case "dinan-chezy":
+                        retour.Find(x => x.Nom.ToString().Contains("Chézy-Dinan")).Longitude = f.geometry.coordinates[1];
+                        retour.Find(x => x.Nom.ToString().Contains("Chézy-Dinan")).Latitude = f.geometry.coordinates[0];
+                        break;
+                    case "charles-de-gaulle":
+                        retour.Find(x => x.Nom.ToString().Contains("Charles de Gaulle")).Longitude = f.geometry.coordinates[1];
+                        retour.Find(x => x.Nom.ToString().Contains("Charles de Gaulle")).Latitude = f.geometry.coordinates[0];
+                        break;
+                    case "kleber":
+                        retour.Find(x => x.Nom.ToString().Contains("Kléber")).Longitude = f.geometry.coordinates[1];
+                        retour.Find(x => x.Nom.ToString().Contains("Kléber")).Latitude = f.geometry.coordinates[0];
+                        break;
+                    default:
+                        retour.Find(x => x.Nom.ToString().Normalize().ToLower().Contains(f.id)).Longitude = f.geometry.coordinates[1];
+                        retour.Find(x => x.Nom.ToString().Normalize().ToLower().Contains(f.id)).Latitude = f.geometry.coordinates[0];
+                        break;
+                }            
+            }
+
+            List<CsvTarifs> records = WebServiceParking.getTarifs("http://data.citedia.com/r1/parks/timetable-and-prices");
+            foreach (CsvTarifs record in records) {
+                //Récupération du tarif
+                List<Tarif> tarifs = new List<Tarif>();
+                if (record.Parking == "colombier" || record.Parking == "lice" || record.Parking == "hoche") {
+                    for (int i = 0; i < 4; i++)
+                    {
+                        Tarif tarif = null;
+                        switch (i)
+                        {
+                            case 0:
+                                tarif = new Tarif(0, true, double.Parse(record.Tarifs.Substring(34, 4)),0.25);
+                                break;
+                            case 1:
+                                tarif = new Tarif(1, true, double.Parse(record.Tarifs.Substring(65, 4)),0.25);
+                                break;
+                            case 2:
+                                tarif = new Tarif(-1, false, double.Parse(record.Tarifs.Substring(113, 4)),0.25);
+                                break;
+                            case 3:
+                                tarif = new Tarif(24, true, double.Parse(record.Tarifs.Substring(147, 4)),4);
+                                break;
+                        }
+                        tarifs.Add(tarif);
+                    }
+                }
+                if (record.Parking == "charles-de-gaulle")
+                {
+                    for (int i = 0; i < 5; i++)
+                    {
+                        Tarif tarif = null;
+                        switch (i)
+                        {
+                            case 0:
+                                tarif = new Tarif(0, true, double.Parse(record.Tarifs.Substring(34, 4)), 0.25);
+                                break;
+                            case 1:
+                                tarif = new Tarif(1, true, double.Parse(record.Tarifs.Substring(65, 4)), 0.25);
+                                break;
+                            case 2:
+                                tarif = new Tarif(-1, false, double.Parse(record.Tarifs.Substring(113, 4)), 0.25);
+                                break;
+                            case 3:
+                                tarif = new Tarif(24, true, double.Parse(record.Tarifs.Substring(147, 4)), 0.5);
+                                break;
+                            case 4:
+                                tarif = new Tarif(168, true, double.Parse(record.Tarifs.Substring(180, 4)), 1);
+                                break;
+                        }
+                        tarifs.Add(tarif);
+                    }
+                }
+                if (record.Parking == "arsenal" || record.Parking == "dinan-chezy" || record.Parking == "kleber" || record.Parking == "vilaine")
+                {
+                    for (int i = 0; i < 3; i++)
+                    {
+                        Tarif tarif = null;
+                        switch (i)
+                        {
+                            case 0:
+                                tarif = new Tarif(0, true, double.Parse(record.Tarifs.Substring(34, 4)), 0.25);
+                                break;
+                            case 1:
+                                tarif = new Tarif(-1, false, double.Parse(record.Tarifs.Substring(67, 4)), 0.25);
+                                break;
+                            case 2:
+                                if (record.Parking == "vilaine")
+                                {
+                                    tarif = new Tarif(24, true, double.Parse(record.Tarifs.Substring(101, 4)), 0.25);
+                                }
+                                else {
+                                    tarif = new Tarif(24, true, double.Parse(record.Tarifs.Substring(101, 4)), 4);
+                                }
+                                break;
+                        }
+                        tarifs.Add(tarif);
+                    }
+                } 
+                if (record.Parking == "gare-sud")
+                {
+                    for (int i = 0; i < 5; i++)
+                    {
+                        Tarif tarif = null;
+                        switch (i)
+                        {
+                            case 0:
+                                tarif = new Tarif(0, true, double.Parse(record.Tarifs.Substring(34, 4)), 0.25);
+                                break;
+                            case 1:
+                                tarif = new Tarif(2, true, double.Parse(record.Tarifs.Substring(65, 4)), 0.25);
+                                break;
+                            case 2:
+                                tarif = new Tarif(4, true, double.Parse(record.Tarifs.Substring(96, 4)), 0.25);
+                                break;
+                            case 3:
+                                tarif = new Tarif(-1, false, double.Parse(record.Tarifs.Substring(145, 4)), 0.25);
+                                break;
+                            case 4:
+                                tarif = new Tarif(24, true, double.Parse(record.Tarifs.Substring(179, 4)), 0.5);
+                                break;
+                        }
+                        tarifs.Add(tarif);
+                    }
+                }
+
+                //Inclusion dans la liste
+                switch (record.Parking)
+                {
+                    case "dinan-chezy":
+                        retour.Find(x => x.Nom.ToString().Contains("Chézy-Dinan")).Lieu = record.Adresse;
+                        retour.Find(x => x.Nom.ToString().Contains("Chézy-Dinan")).SeuilComplet = Int32.Parse(record.Seuil_complet);
+                        retour.Find(x => x.Nom.ToString().Contains("Chézy-Dinan")).Tarifs = tarifs;
+                        break;
+                    case "charles-de-gaulle":
+                        retour.Find(x => x.Nom.ToString().Contains("Charles de Gaulle")).Lieu = record.Adresse;
+                        retour.Find(x => x.Nom.ToString().Contains("Charles de Gaulle")).SeuilComplet = Int32.Parse(record.Seuil_complet);
+                        retour.Find(x => x.Nom.ToString().Contains("Charles de Gaulle")).Tarifs = tarifs;
+                        break;
+                    case "kleber":
+                        retour.Find(x => x.Nom.ToString().Contains("Kléber")).Lieu = record.Adresse;
+                        retour.Find(x => x.Nom.ToString().Contains("Kléber")).SeuilComplet = Int32.Parse(record.Seuil_complet);
+                        retour.Find(x => x.Nom.ToString().Contains("Kléber")).Tarifs = tarifs;
+                        break;
+                    default:
+                        retour.Find(x => x.Nom.ToString().Normalize().ToLower().Contains(record.Parking)).Lieu = record.Adresse;
+                        retour.Find(x => x.Nom.ToString().Normalize().ToLower().Contains(record.Parking)).SeuilComplet = Int32.Parse(record.Seuil_complet);
+                        retour.Find(x => x.Nom.ToString().Normalize().ToLower().Contains(record.Parking)).Tarifs = tarifs;
+                        break;
+                }
+            }
 
             return retour;
         }

@@ -24,6 +24,10 @@ namespace BoEvents
 
         public List<Tarif> Tarifs { get; set; }
 
+        public double Longitude { get; set; }
+
+        public double Latitude { get; set; }
+
         public Parking() {
             this.ID = Guid.NewGuid();
         }

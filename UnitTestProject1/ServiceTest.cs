@@ -19,5 +19,19 @@ namespace UnitTestProject1
 
             Assert.IsNotNull(parkings);
         }
+
+        [TestMethod]
+        public void GetAllParkings()
+        {
+
+            Assert.IsNotNull(ServiceParking.GetAll());
+        }
+
+        [TestMethod]
+        public void GetTarifs()
+        {
+            Assert.IsNotNull(WebServiceParking.getTarifs("http://data.citedia.com/r1/parks/timetable-and-prices"));
+        }
+
     }
 }
