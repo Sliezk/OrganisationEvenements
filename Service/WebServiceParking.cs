@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using CsvHelper;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -48,6 +49,42 @@ namespace Service
                 myHttpWebResponse = null;
             }
             return item;
+        }
+
+        public static List<CsvTarifs> getTarifs(string URL)
+        {
+            HttpWebRequest myHttpWebRequest = null;     //Declare an HTTP-specific implementation of the WebRequest class.
+            HttpWebResponse myHttpWebResponse = null;   //Declare an HTTP-specific implementation of the WebResponse class
+            List<CsvTarifs> records = new List<CsvTarifs>();
+            try
+            {
+                //Create Request
+                myHttpWebRequest = (HttpWebRequest)HttpWebRequest.Create(URL);
+                myHttpWebRequest.Method = WebRequestMethods.Http.Get;
+                myHttpWebRequest.ContentType = "text / csv; charset = UTF - 8";
+
+                //Get Response
+                myHttpWebResponse = (HttpWebResponse)myHttpWebRequest.GetResponse();
+
+                using (CsvReader csvReader = new CsvReader(new StreamReader(myHttpWebResponse.GetResponseStream()), true))
+                {
+                    csvReader.Configuration.Delimiter = ";";
+                    csvReader.Configuration.HasHeaderRecord = true;
+                    csvReader.Configuration.MissingFieldFound = null;
+
+                    records = csvReader.GetRecords<CsvTarifs>().ToList();
+                }
+            }
+            catch (Exception myException)
+            {
+                throw new Exception("Error Occurred in getTarifs", myException);
+            }
+            finally
+            {
+                myHttpWebRequest = null;
+                myHttpWebResponse = null;
+            }
+            return records;
         }
 
     }

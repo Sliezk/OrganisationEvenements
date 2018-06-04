@@ -9,25 +9,21 @@ namespace BoEvents
     public class Tarif
     {
         public Guid ID { get; set; }
-
-        public Boolean PremiereHeure { get; set; }
-
-        public Boolean Premieres24h { get; set; }
-
-        public Boolean AuDelaDe7j { get; set; }
-
-        public float Montant { get; set; }
+        public int DebutPeriode { get; set; }
+        public Boolean Jour { get; set; }
+        public double Montant { get; set; }
+        public double Coeff { get; set; }
 
         public Tarif() {
             this.ID = Guid.NewGuid();
         }
 
-        public Tarif(Boolean premiereHeure, Boolean premieres24h, Boolean auDelaDe7j, float montant) {
+        public Tarif(int debutPeriode, Boolean jour, double montant, double coeff) {
             this.ID = Guid.NewGuid();
-            this.PremiereHeure = premiereHeure;
-            this.Premieres24h = premieres24h;
-            this.AuDelaDe7j = auDelaDe7j;
+            this.DebutPeriode = debutPeriode;
+            this.Jour = jour;
             this.Montant = montant;
+            this.Coeff = coeff;
         }
 
     }
