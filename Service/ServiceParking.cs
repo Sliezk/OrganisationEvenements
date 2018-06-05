@@ -178,6 +178,9 @@ namespace Service
                 }
             }
 
+            //Ajout de l'addresse du parking gratuit centre commercial Kennedy
+            retour.Find(x => x.Nom.ToString().Contains("Centre Commercial Kennedy")).Lieu = "50 cours Du President Jf Kennedy";
+
             return retour;
         }
 
@@ -187,6 +190,32 @@ namespace Service
 
             List<Parking> parkings = GetAll();
             retour = parkings.Find(x => x.ID.ToString().Contains(id.ToString()));
+
+            return retour;
+        }
+
+        public static List<Parking> GetNearests(Evenement e)
+        {
+            List<Parking> retour = new List<Parking>();
+            Dictionary<String, double> distances = new Dictionary<String, double>();
+
+            GoogleGeocoder geo = new GoogleGeocoder();
+            Coordinates c1 = geo.Geocode(e.Lieu + " Rennes");
+
+            List<Parking> parkings = GetAll();
+
+            foreach (Parking p in parkings) {
+                Coordinates c2 = geo.Geocode(p.Lieu + " Rennes");
+                double distance = Distance.distance(c1.Latitude, c1.Longitude, c2.Latitude, c2.Longitude,'K');
+                distances.Add(p.Nom, distance);
+            }
+
+            List<KeyValuePair<string, double>> myList = distances.ToList();
+            myList.Sort((pair1, pair2) => pair1.Value.CompareTo(pair2.Value));
+
+            for (int i = 0; i < 3; i++) {
+                retour.Add(parkings.Find(x => x.Nom.ToString().Contains(myList[i].Key)));
+            }
 
             return retour;
         }

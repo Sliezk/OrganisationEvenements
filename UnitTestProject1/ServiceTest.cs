@@ -33,5 +33,14 @@ namespace UnitTestProject1
             Assert.IsNotNull(WebServiceParking.getTarifs("http://data.citedia.com/r1/parks/timetable-and-prices"));
         }
 
+        [TestMethod]
+        public void GetNearest()
+        {
+            BoEvents.Evenement e = new BoEvents.Evenement();
+            e.Lieu = "Rennes";
+            e.Nom = "j'aime la viande";
+            Assert.IsNotNull(ServiceParking.GetNearests(e));
+        }
+
     }
 }

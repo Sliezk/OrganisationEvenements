@@ -62,7 +62,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Coordinates.cs" />
     <Compile Include="CsvTarifs.cs" />
+    <Compile Include="Distance.cs" />
+    <Compile Include="GoogleGeocoder .cs" />
+    <Compile Include="IGeocoder.cs" />
     <Compile Include="JsonListeParkings.cs" />
     <Compile Include="ServiceEvenement.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
