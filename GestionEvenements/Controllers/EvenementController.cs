@@ -52,8 +52,6 @@ namespace GestionEvenements.Controllers
         public ActionResult Details(Guid id)
         {
             EvenementViewModel EVM = new EvenementViewModel(ServiceEvenement.GetAll().FirstOrDefault(e => e.ID == id));
-            Theme theme = ServiceTheme.Get(EVM.Theme.ID);
-            ViewBag.Theme = theme;
             return View(EVM);
         }
 

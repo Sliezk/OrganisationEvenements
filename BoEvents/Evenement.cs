@@ -43,5 +43,7 @@ namespace BoEvents
 
         public Image Image { get; set; }
 
+        public Guid ImageID { get; set; }
+
     }
 }

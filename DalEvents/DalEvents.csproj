@@ -108,6 +108,10 @@
     <Compile Include="Migrations\201806060754295_themeId.Designer.cs">
       <DependentUpon>201806060754295_themeId.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201806060942018_imageID.cs" />
+    <Compile Include="Migrations\201806060942018_imageID.Designer.cs">
+      <DependentUpon>201806060942018_imageID.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -157,6 +161,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201806060754295_themeId.resx">
       <DependentUpon>201806060754295_themeId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806060942018_imageID.resx">
+      <DependentUpon>201806060942018_imageID.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
