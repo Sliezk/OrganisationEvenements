@@ -109,6 +109,10 @@
     <Compile Include="Migrations\201806060942018_imageID.Designer.cs">
       <DependentUpon>201806060942018_imageID.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201806061008003_retraitImageID.cs" />
+    <Compile Include="Migrations\201806061008003_retraitImageID.Designer.cs">
+      <DependentUpon>201806061008003_retraitImageID.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -161,6 +165,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201806060942018_imageID.resx">
       <DependentUpon>201806060942018_imageID.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806061008003_retraitImageID.resx">
+      <DependentUpon>201806061008003_retraitImageID.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
