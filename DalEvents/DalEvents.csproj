@@ -85,6 +85,26 @@
     <Compile Include="Migrations\201806041518337_AjoutThemes2.Designer.cs">
       <DependentUpon>201806041518337_AjoutThemes2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201806050738191_AjoutImageEvent.cs" />
+    <Compile Include="Migrations\201806050738191_AjoutImageEvent.Designer.cs">
+      <DependentUpon>201806050738191_AjoutImageEvent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806050913211_AjoutImagePath.cs" />
+    <Compile Include="Migrations\201806050913211_AjoutImagePath.Designer.cs">
+      <DependentUpon>201806050913211_AjoutImagePath.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806050936260_AjoutImageByte.cs" />
+    <Compile Include="Migrations\201806050936260_AjoutImageByte.Designer.cs">
+      <DependentUpon>201806050936260_AjoutImageByte.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806051257061_ModifTheme.cs" />
+    <Compile Include="Migrations\201806051257061_ModifTheme.Designer.cs">
+      <DependentUpon>201806051257061_ModifTheme.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806060754295_themeId.cs" />
+    <Compile Include="Migrations\201806060754295_themeId.Designer.cs">
+      <DependentUpon>201806060754295_themeId.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -119,6 +139,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201806041518337_AjoutThemes2.resx">
       <DependentUpon>201806041518337_AjoutThemes2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806050738191_AjoutImageEvent.resx">
+      <DependentUpon>201806050738191_AjoutImageEvent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806050913211_AjoutImagePath.resx">
+      <DependentUpon>201806050913211_AjoutImagePath.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806050936260_AjoutImageByte.resx">
+      <DependentUpon>201806050936260_AjoutImageByte.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806051257061_ModifTheme.resx">
+      <DependentUpon>201806051257061_ModifTheme.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806060754295_themeId.resx">
+      <DependentUpon>201806060754295_themeId.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

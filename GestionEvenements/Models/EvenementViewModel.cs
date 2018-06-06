@@ -47,17 +47,35 @@ namespace GestionEvenements.Models
             set { Metier.Theme = value; }
         }
 
+        public Guid ThemeID
+        {
+            get { return this.Metier.ThemeID; }
+            set { Metier.ThemeID = value; }
+        }
+
         public string Description
         {
             get { return this.Metier.Description; }
             set { Metier.Description = value; }
         }
 
+        public Image Image
+        {
+            get { return this.Metier.Image; }
+            set { Metier.Image = value; }
+        }
+
 
         public void Save()
         {
+            if (this.Metier.Theme == null)
+            {
+                this.Metier.Theme = new Theme() { ID = this.ThemeID };
+            }
+
             if (this.ID == Guid.Empty)
             {
+                
                 //insert
                 this.ID = Guid.NewGuid();
                 ServiceEvenement.Insert(this.Metier);

@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="Evenement.cs" />
     <Compile Include="IEntityIdentifiable.cs" />
+    <Compile Include="Image.cs" />
     <Compile Include="Parking.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tarif.cs" />

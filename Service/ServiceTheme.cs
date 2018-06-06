@@ -33,7 +33,7 @@ namespace Service
             return retour;
         }
 
-        private static Theme Get(Guid id, BddContext context)
+        public static Theme Get(Guid id, BddContext context)
         {
             return context.Themes.FirstOrDefault(t => t.ID == id);
         }

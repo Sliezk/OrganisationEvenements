@@ -62,6 +62,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ServiceImage.cs" />
     <Compile Include="CsvTarifs.cs" />
     <Compile Include="JsonListeParkings.cs" />
     <Compile Include="ServiceEvenement.cs" />
