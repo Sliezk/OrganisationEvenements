@@ -3,6 +3,7 @@ using GestionEvenements.Models;
 using Service;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -16,7 +17,7 @@ namespace GestionEvenements.Controllers
         public ActionResult Index()
         {
             List<EvenementViewModel> listes = new List<EvenementViewModel>();
-            List<Theme> listeThemes = new List<Theme>();
+            //List<Theme> listeThemes = new List<Theme>();
 
 
             List<Evenement> evenements = ServiceEvenement.GetAll();
@@ -25,11 +26,11 @@ namespace GestionEvenements.Controllers
                 listes.Add(new EvenementViewModel(ev));
             }
 
-            List<Theme> themes = ServiceTheme.GetAll();
-            foreach (Theme th in themes)
-            {
-                listeThemes.Add(th);
-            }
+            //List<Theme> themes = ServiceTheme.GetAll();
+            //foreach (Theme th in themes)
+            //{
+            //    listeThemes.Add(th);
+            //}
 
             return View(listes);
         }
@@ -69,19 +70,25 @@ namespace GestionEvenements.Controllers
 
         // POST: Evenement/Edit/5
         [HttpPost]
-        public ActionResult Edit(EvenementViewModel EVM/*, HttpPostedFileBase imageID*/)
+        public ActionResult Edit(EvenementViewModel EVM, HttpPostedFileBase file)
         {
             try
             {
+                if (file.ContentLength > 0)
+                {
+                    string _FileName = Path.GetFileName(file.FileName);
+                    string _path = Path.Combine(Server.MapPath("~/Content/Images/"), _FileName);
+                    file.SaveAs(_path);
+                    Image img = new Image() { ID = Guid.NewGuid(), Path = _path };
+                    ServiceImage.Insert(img);
+                    EVM.Image = ServiceImage.Get(img.ID);
+                    EVM.ImageID = img.ID;
+                }
+
                 /*if (imageID != null && imageID.ContentLength > 0)
                 {
                     EVM.Image = new Image() { ID = Guid.NewGuid(), CodeBinaire = new byte[imageID.ContentLength] };
                     imageID.InputStream.Read(EVM.Image.CodeBinaire, 0, imageID.ContentLength);
-                    EVM.Save();
-                }
-                else
-                { 
-                    EVM.Save();
                 }*/
 
                 EVM.Save();

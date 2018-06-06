@@ -65,11 +65,11 @@ namespace GestionEvenements.Models
             set { Metier.Image = value; }
         }
 
-        /*public Guid ImageID
+        public Guid ImageID
         {
             get { return this.Metier.ImageID; }
             set { Metier.ImageID = value; }
-        }*/
+        }
 
 
         public void Save()
@@ -79,10 +79,10 @@ namespace GestionEvenements.Models
                 this.Metier.Theme = new Theme() { ID = this.ThemeID, Nom = ServiceTheme.Get(this.ThemeID).Nom };
             }
 
-            /*if (this.Metier.Image == null)
+            if (this.Metier.Image == null)
             {
-                this.Metier.Image = new Image() { ID = this.ImageID, CodeBinaire = ServiceImage.Get(this.ImageID).CodeBinaire };
-            }*/
+                this.Metier.Image = new Image() { ID = this.ImageID, Path = ServiceImage.Get(this.ImageID).Path };
+            }
 
             if (this.ID == Guid.Empty)
             {

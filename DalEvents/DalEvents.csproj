@@ -116,6 +116,14 @@
     <Compile Include="Migrations\201806061008003_retraitImageID.Designer.cs">
       <DependentUpon>201806061008003_retraitImageID.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201806061022240_rajoutImageID.cs" />
+    <Compile Include="Migrations\201806061022240_rajoutImageID.Designer.cs">
+      <DependentUpon>201806061022240_rajoutImageID.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806061256470_migration1.cs" />
+    <Compile Include="Migrations\201806061256470_migration1.Designer.cs">
+      <DependentUpon>201806061256470_migration1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -171,6 +179,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201806061008003_retraitImageID.resx">
       <DependentUpon>201806061008003_retraitImageID.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806061022240_rajoutImageID.resx">
+      <DependentUpon>201806061022240_rajoutImageID.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806061256470_migration1.resx">
+      <DependentUpon>201806061256470_migration1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

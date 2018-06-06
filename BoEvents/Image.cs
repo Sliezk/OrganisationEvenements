@@ -14,14 +14,14 @@ namespace BoEvents
 
         }
 
-        public Image(Guid id, byte[] codeBinaire)
+        public Image(Guid id, string path)
         {
             ID = id;
-            CodeBinaire = codeBinaire;
+            Path = path;
         }
 
         public Guid ID { get; set; }
-        public byte[] CodeBinaire { get; set; }
+        public string Path { get; set; }
 
     }
 }

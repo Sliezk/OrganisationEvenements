@@ -6,7 +6,7 @@
 
 <h2>Edit</h2>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Edit", "Evenement", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
                 @Html.AntiForgeryToken()
 
@@ -64,7 +64,7 @@
     </div>
 
     <div class="form-group">
-        <input type="file" id="image"/>
+        @Html.TextBox("file", "", new { type = "file" }) <br />
     </div>
 
     <div class="form-group">

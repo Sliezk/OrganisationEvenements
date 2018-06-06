@@ -18,7 +18,7 @@ namespace Service
             List<Evenement> retour = null;
             using (BddContext context = new BddContext())
             {
-                retour = context.Evenements.Include("Theme")/*.Include("Image")*/.ToList();
+                retour = context.Evenements.Include("Theme").Include("Image").ToList();
 
             }
             return retour;
@@ -52,6 +52,7 @@ namespace Service
             {
                 
                 e.Theme = ServiceTheme.Get(e.Theme.ID, context);
+                e.Image = ServiceImage.Get(e.Image.ID, context);
 
                 context.Evenements.Add(e);
                 context.SaveChanges();

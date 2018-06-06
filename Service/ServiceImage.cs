@@ -18,12 +18,7 @@ namespace Service
             }
             return retour;
         }
-
-        /// <summary>
-        /// retoune le livre en BDD
-        /// </summary>
-        /// <param name="id">identifiant du livre</param>
-        /// <returns></returns>
+        
         public static Image Get(Guid id)
         {
             Image retour = null;
@@ -35,8 +30,7 @@ namespace Service
             return retour;
         }
 
-        //surcharge, on la met en private car utilisée uniquement par le service
-        private static Image Get(Guid id, BddContext context)
+        public static Image Get(Guid id, BddContext context)
         {
             return context.Images.FirstOrDefault(i => i.ID == id);
         }
