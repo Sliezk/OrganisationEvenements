@@ -15,9 +15,6 @@
             @Html.DisplayNameFor(model => model.Capacite)
         </th>
         <th>
-            Tarif en vigueur
-        </th>
-        <th>
             Coût estimé
         </th>
     </tr>
@@ -37,10 +34,7 @@
             @Html.DisplayFor(modelItem => item.Capacite)
         </td>
         <td>
-            @ViewBag.Tarif
-        </td>
-        <td>
-            @ViewBag.Cout
+            @Html.DisplayFor(modelItem => item.Cout)
         </td>
     </tr>
 }

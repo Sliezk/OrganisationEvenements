@@ -1,4 +1,5 @@
-﻿using GestionEvenements.Models;
+﻿using BoEvents;
+using GestionEvenements.Models;
 using Service;
 using System;
 using System.Collections.Generic;
@@ -15,18 +16,25 @@ namespace GestionEvenements.Controllers
             return View(EvenementViewModel.GetAll());
         }
 
-        // GET: Parking
-        public ActionResult ListerParkings()
+        public ActionResult Description(Guid ID)
         {
+            ViewBag.ID = ID;
+            return View();
+        }
+
+        // GET: Parking
+        public ActionResult ListerParkings(Guid ID)
+        {
+            Evenement e = ServiceEvenement.Get(ID);
             //ViewBag.Tarif = ;
-            //ViewBag.Cout = ;
-            return View(ParkingViewModel.GetAll());
+      
+            return View(ParkingViewModel.GetNearest(e));
         }
 
         public ActionResult DetailsEvenement(Guid ID)
         {
 
-            return View(ServiceEvenement.Get(ID));
+            return View(EvenementViewModel.Get(ID));
         }
 
         public ActionResult Map()

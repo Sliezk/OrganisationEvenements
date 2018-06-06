@@ -5,12 +5,12 @@
 
 <h2>Description de l'évènement</h2>
 
-@Html.Action("Parking", "DetailsEvenement")
+@Html.Action("DetailsEvenement", new { ID = @ViewBag.ID })
 
 <br />
 
-@Html.Action("Parking", "ListerParkings")
+@Html.Action("ListerParkings", new { ID = @ViewBag.ID })
 
 <br />
 
-@Html.Action("Parking", "Map")
+@Html.Action("Map")

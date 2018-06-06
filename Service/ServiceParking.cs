@@ -58,16 +58,16 @@ namespace Service
                         switch (i)
                         {
                             case 0:
-                                tarif = new Tarif(0, true, double.Parse(record.Tarifs.Substring(34, 4)),0.25);
+                                tarif = new Tarif("0", true, double.Parse(record.Tarifs.Substring(34, 4)),0.25,1);
                                 break;
                             case 1:
-                                tarif = new Tarif(1, true, double.Parse(record.Tarifs.Substring(65, 4)),0.25);
+                                tarif = new Tarif("1", true, double.Parse(record.Tarifs.Substring(65, 4)),0.25,13);
                                 break;
                             case 2:
-                                tarif = new Tarif(-1, false, double.Parse(record.Tarifs.Substring(113, 4)),0.25);
+                                tarif = new Tarif("-1", false, double.Parse(record.Tarifs.Substring(113, 4)),0.25,10);
                                 break;
                             case 3:
-                                tarif = new Tarif(24, true, double.Parse(record.Tarifs.Substring(147, 4)),4);
+                                tarif = new Tarif("24", true, double.Parse(record.Tarifs.Substring(147, 4)),4,-1);
                                 break;
                         }
                         tarifs.Add(tarif);
@@ -81,19 +81,19 @@ namespace Service
                         switch (i)
                         {
                             case 0:
-                                tarif = new Tarif(0, true, double.Parse(record.Tarifs.Substring(34, 4)), 0.25);
+                                tarif = new Tarif("0", true, double.Parse(record.Tarifs.Substring(34, 4)), 0.25,1);
                                 break;
                             case 1:
-                                tarif = new Tarif(1, true, double.Parse(record.Tarifs.Substring(65, 4)), 0.25);
+                                tarif = new Tarif("1", true, double.Parse(record.Tarifs.Substring(65, 4)), 0.25,13);
                                 break;
                             case 2:
-                                tarif = new Tarif(-1, false, double.Parse(record.Tarifs.Substring(113, 4)), 0.25);
+                                tarif = new Tarif("-1", false, double.Parse(record.Tarifs.Substring(113, 4)), 0.25,10);
                                 break;
                             case 3:
-                                tarif = new Tarif(24, true, double.Parse(record.Tarifs.Substring(147, 4)), 0.5);
+                                tarif = new Tarif("24", true, double.Parse(record.Tarifs.Substring(147, 4)), 0.5, 144);
                                 break;
                             case 4:
-                                tarif = new Tarif(168, true, double.Parse(record.Tarifs.Substring(180, 4)), 1);
+                                tarif = new Tarif("168", true, double.Parse(record.Tarifs.Substring(180, 4)), 1,-1);
                                 break;
                         }
                         tarifs.Add(tarif);
@@ -107,18 +107,18 @@ namespace Service
                         switch (i)
                         {
                             case 0:
-                                tarif = new Tarif(0, true, double.Parse(record.Tarifs.Substring(34, 4)), 0.25);
+                                tarif = new Tarif("0", true, double.Parse(record.Tarifs.Substring(34, 4)), 0.25,14);
                                 break;
                             case 1:
-                                tarif = new Tarif(-1, false, double.Parse(record.Tarifs.Substring(67, 4)), 0.25);
+                                tarif = new Tarif("-1", false, double.Parse(record.Tarifs.Substring(67, 4)), 0.25,10);
                                 break;
                             case 2:
                                 if (record.Parking == "vilaine")
                                 {
-                                    tarif = new Tarif(24, true, double.Parse(record.Tarifs.Substring(101, 4)), 0.25);
+                                    tarif = new Tarif("24", true, double.Parse(record.Tarifs.Substring(101, 4)), 0.25,-1);
                                 }
                                 else {
-                                    tarif = new Tarif(24, true, double.Parse(record.Tarifs.Substring(101, 4)), 4);
+                                    tarif = new Tarif("24", true, double.Parse(record.Tarifs.Substring(101, 4)), 4,-1);
                                 }
                                 break;
                         }
@@ -133,19 +133,19 @@ namespace Service
                         switch (i)
                         {
                             case 0:
-                                tarif = new Tarif(0, true, double.Parse(record.Tarifs.Substring(34, 4)), 0.25);
+                                tarif = new Tarif("0", true, double.Parse(record.Tarifs.Substring(34, 4)), 0.25,2);
                                 break;
                             case 1:
-                                tarif = new Tarif(2, true, double.Parse(record.Tarifs.Substring(65, 4)), 0.25);
+                                tarif = new Tarif("2", true, double.Parse(record.Tarifs.Substring(65, 4)), 0.25,2);
                                 break;
                             case 2:
-                                tarif = new Tarif(4, true, double.Parse(record.Tarifs.Substring(96, 4)), 0.25);
+                                tarif = new Tarif("4", true, double.Parse(record.Tarifs.Substring(96, 4)), 0.25,10);
                                 break;
                             case 3:
-                                tarif = new Tarif(-1, false, double.Parse(record.Tarifs.Substring(145, 4)), 0.25);
+                                tarif = new Tarif("-1", false, double.Parse(record.Tarifs.Substring(145, 4)), 0.25,10);
                                 break;
                             case 4:
-                                tarif = new Tarif(24, true, double.Parse(record.Tarifs.Substring(179, 4)), 0.5);
+                                tarif = new Tarif("24", true, double.Parse(record.Tarifs.Substring(179, 4)), 0.5,-1);
                                 break;
                         }
                         tarifs.Add(tarif);
@@ -215,6 +215,328 @@ namespace Service
 
             for (int i = 0; i < 3; i++) {
                 retour.Add(parkings.Find(x => x.Nom.ToString().Contains(myList[i].Key)));
+            }
+
+            return retour;
+        }
+
+        public static double GetCost(Evenement e, Parking p) {
+            double retour = 0;
+            float duree = e.Duree;
+            float dureeRestante = e.Duree;
+            DateTime horaire = e.Date;
+            Tarif tarif;
+
+            if (p.Nom == "Colombier" || p.Nom == "Lice" || p.Nom == "Hoche")
+            {
+                if (e.Duree < 24)
+                {
+                    if (horaire.Hour > 9 && (horaire.Hour + duree) < 21)
+                    {
+                        if (duree < 1)
+                        {
+                            tarif = p.Tarifs.Find(x => x.DebutPeriode.ToString().Contains("0"));
+                            retour += tarif.Montant * duree / tarif.Coeff;
+                        }
+                        if (duree > 1)
+                        {
+                            tarif = p.Tarifs.Find(x => x.DebutPeriode.ToString().Contains("0"));
+                            retour += tarif.Montant / tarif.Coeff;
+                            tarif = p.Tarifs.Find(x => x.DebutPeriode.ToString().Contains("1"));
+                            retour += tarif.Montant * (duree - 1) / tarif.Coeff;
+                        }
+                    }
+                    if (horaire.Hour > 21 && (horaire.Hour + duree) < 31)
+                    {
+                        tarif = p.Tarifs.Find(x => x.DebutPeriode.ToString().Contains("-1"));
+                        retour += tarif.Montant * duree / tarif.Coeff;
+                    }
+                    if (horaire.Hour < 9 && (horaire.Hour + duree) < 21)
+                    {
+                        tarif = p.Tarifs.Find(x => x.DebutPeriode.ToString().Contains("-1"));
+                        retour += tarif.Montant * (9 - horaire.Hour) / tarif.Coeff;
+                        dureeRestante -= 9 - horaire.Hour;
+                        if (dureeRestante < 1)
+                        {
+                            tarif = p.Tarifs.Find(x => x.DebutPeriode.ToString().Contains("0"));
+                            retour += tarif.Montant * dureeRestante / tarif.Coeff;
+                        }
+                        if (dureeRestante > 1)
+                        {
+                            tarif = p.Tarifs.Find(x => x.DebutPeriode.ToString().Contains("0"));
+                            retour += tarif.Montant / tarif.Coeff;
+                            tarif = p.Tarifs.Find(x => x.DebutPeriode.ToString().Contains("1"));
+                            retour += tarif.Montant * (dureeRestante - 1) / tarif.Coeff;
+                        }
+                    }
+                    if (horaire.Hour < 21 && (horaire.Hour + duree) < 31)
+                    {
+                        if (dureeRestante < 1)
+                        {
+                            tarif = p.Tarifs.Find(x => x.DebutPeriode.ToString().Contains("0"));
+                            retour += tarif.Montant * (21 - horaire.Hour) / tarif.Coeff;
+                        }
+                        if (dureeRestante > 1)
+                        {
+                            tarif = p.Tarifs.Find(x => x.DebutPeriode.ToString().Contains("0"));
+                            retour += tarif.Montant / tarif.Coeff;
+                            tarif = p.Tarifs.Find(x => x.DebutPeriode.ToString().Contains("1"));
+                            retour += tarif.Montant * ((21 - horaire.Hour) - 1) / tarif.Coeff;
+                        }
+                        dureeRestante -= 21 - horaire.Hour;
+                        tarif = p.Tarifs.Find(x => x.DebutPeriode.ToString().Contains("-1"));
+                        retour += tarif.Montant * dureeRestante / tarif.Coeff;
+
+                    }
+                }
+                else
+                {
+                    tarif = p.Tarifs.Find(x => x.DebutPeriode.ToString().Contains("0"));
+                    retour += tarif.Montant / tarif.Coeff;
+                    tarif = p.Tarifs.Find(x => x.DebutPeriode.ToString().Contains("1"));
+                    retour += tarif.Montant * 13 / tarif.Coeff;
+                    tarif = p.Tarifs.Find(x => x.DebutPeriode.ToString().Contains("-1"));
+                    retour += tarif.Montant * 10 / tarif.Coeff;
+                    tarif = p.Tarifs.Find(x => x.DebutPeriode.ToString().Contains("24"));
+                    retour += tarif.Montant * (duree-24) / tarif.Coeff;
+                }
+            }
+
+            if (p.Nom == "Charles de Gaulle")
+            {
+                if (e.Duree < 24)
+                {
+                    if (horaire.Hour > 9 && (horaire.Hour + duree) < 21)
+                    {
+                        if (duree < 1)
+                        {
+                            tarif = p.Tarifs.Find(x => x.DebutPeriode.ToString().Contains("0"));
+                            retour += tarif.Montant * duree / tarif.Coeff;
+                        }
+                        if (duree > 1)
+                        {
+                            tarif = p.Tarifs.Find(x => x.DebutPeriode.ToString().Contains("0"));
+                            retour += tarif.Montant / tarif.Coeff;
+                            tarif = p.Tarifs.Find(x => x.DebutPeriode.ToString().Contains("1"));
+                            retour += tarif.Montant * (duree - 1) / tarif.Coeff;
+                        }
+                    }
+                    if (horaire.Hour > 21 && (horaire.Hour + duree) < 31)
+                    {
+                        tarif = p.Tarifs.Find(x => x.DebutPeriode.ToString().Contains("-1"));
+                        retour += tarif.Montant * duree / tarif.Coeff;
+                    }
+                    if (horaire.Hour < 9 && (horaire.Hour + duree) < 21)
+                    {
+                        tarif = p.Tarifs.Find(x => x.DebutPeriode.ToString().Contains("-1"));
+                        retour += tarif.Montant * (9 - horaire.Hour) / tarif.Coeff;
+                        dureeRestante -= 9 - horaire.Hour;
+                        if (dureeRestante < 1)
+                        {
+                            tarif = p.Tarifs.Find(x => x.DebutPeriode.ToString().Contains("0"));
+                            retour += tarif.Montant * dureeRestante / tarif.Coeff;
+                        }
+                        if (dureeRestante > 1)
+                        {
+                            tarif = p.Tarifs.Find(x => x.DebutPeriode.ToString().Contains("0"));
+                            retour += tarif.Montant / tarif.Coeff;
+                            tarif = p.Tarifs.Find(x => x.DebutPeriode.ToString().Contains("1"));
+                            retour += tarif.Montant * (dureeRestante - 1) / tarif.Coeff;
+                        }
+                    }
+                    if (horaire.Hour < 21 && (horaire.Hour + duree) < 31)
+                    {
+                        if (dureeRestante < 1)
+                        {
+                            tarif = p.Tarifs.Find(x => x.DebutPeriode.ToString().Contains("0"));
+                            retour += tarif.Montant * (21 - horaire.Hour) / tarif.Coeff;
+                        }
+                        if (dureeRestante > 1)
+                        {
+                            tarif = p.Tarifs.Find(x => x.DebutPeriode.ToString().Contains("0"));
+                            retour += tarif.Montant / tarif.Coeff;
+                            tarif = p.Tarifs.Find(x => x.DebutPeriode.ToString().Contains("1"));
+                            retour += tarif.Montant * ((21 - horaire.Hour) - 1) / tarif.Coeff;
+                        }
+                        dureeRestante -= 21 - horaire.Hour;
+                        tarif = p.Tarifs.Find(x => x.DebutPeriode.ToString().Contains("-1"));
+                        retour += tarif.Montant * dureeRestante / tarif.Coeff;
+
+                    }
+                }
+                else
+                {
+                    if (e.Duree < 168)
+                    {
+                        tarif = p.Tarifs.Find(x => x.DebutPeriode.ToString().Contains("0"));
+                        retour += tarif.Montant / tarif.Coeff;
+                        tarif = p.Tarifs.Find(x => x.DebutPeriode.ToString().Contains("1"));
+                        retour += tarif.Montant * 13 / tarif.Coeff;
+                        tarif = p.Tarifs.Find(x => x.DebutPeriode.ToString().Contains("-1"));
+                        retour += tarif.Montant * 10 / tarif.Coeff;
+                        tarif = p.Tarifs.Find(x => x.DebutPeriode.ToString().Contains("24"));
+                        retour += tarif.Montant * (duree-24) / tarif.Coeff;
+                    }
+                    else {
+                        tarif = p.Tarifs.Find(x => x.DebutPeriode.ToString().Contains("0"));
+                        retour += tarif.Montant / tarif.Coeff;
+                        tarif = p.Tarifs.Find(x => x.DebutPeriode.ToString().Contains("1"));
+                        retour += tarif.Montant * 13 / tarif.Coeff;
+                        tarif = p.Tarifs.Find(x => x.DebutPeriode.ToString().Contains("-1"));
+                        retour += tarif.Montant * 10 / tarif.Coeff;
+                        tarif = p.Tarifs.Find(x => x.DebutPeriode.ToString().Contains("24"));
+                        retour += tarif.Montant * 120 / tarif.Coeff;
+                        tarif = p.Tarifs.Find(x => x.DebutPeriode.ToString().Contains("24"));
+                        retour += tarif.Montant * (duree-144) / tarif.Coeff;
+                    }
+                        
+                }
+            }
+
+            if (p.Nom == "Arsenal" || p.Nom == "Chézy-Dinan" || p.Nom == "Kléber" || p.Nom == "Vilaine")
+            {
+                if (e.Duree < 24)
+                {
+                    if (horaire.Hour > 9 && (horaire.Hour + duree) < 21)
+                    {
+                        tarif = p.Tarifs.Find(x => x.DebutPeriode.ToString().Contains("0"));
+                        retour += tarif.Montant * duree / tarif.Coeff;
+                    }
+                    if (horaire.Hour > 21 && (horaire.Hour + duree) < 31)
+                    {
+                        tarif = p.Tarifs.Find(x => x.DebutPeriode.ToString().Contains("-1"));
+                        retour += tarif.Montant * duree / tarif.Coeff;
+                    }
+                    if (horaire.Hour < 9 && (horaire.Hour + duree) < 21)
+                    {
+                        tarif = p.Tarifs.Find(x => x.DebutPeriode.ToString().Contains("-1"));
+                        retour += tarif.Montant * (9 - horaire.Hour) / tarif.Coeff;
+                        dureeRestante -= 9 - horaire.Hour;
+                        tarif = p.Tarifs.Find(x => x.DebutPeriode.ToString().Contains("0"));
+                        retour += tarif.Montant * dureeRestante / tarif.Coeff;
+                    }
+                    if (horaire.Hour < 21 && (horaire.Hour + duree) < 31)
+                    {
+                        tarif = p.Tarifs.Find(x => x.DebutPeriode.ToString().Contains("0"));
+                        retour += tarif.Montant * (21 - horaire.Hour) / tarif.Coeff;
+                        dureeRestante -= 21 - horaire.Hour;
+                        tarif = p.Tarifs.Find(x => x.DebutPeriode.ToString().Contains("-1"));
+                        retour += tarif.Montant * dureeRestante / tarif.Coeff;
+
+                    }
+                }
+                else
+                {
+                    tarif = p.Tarifs.Find(x => x.DebutPeriode.ToString().Contains("0"));
+                    retour += tarif.Montant *14 / tarif.Coeff;
+                    tarif = p.Tarifs.Find(x => x.DebutPeriode.ToString().Contains("-1"));
+                    retour += tarif.Montant * 10 / tarif.Coeff;
+                    tarif = p.Tarifs.Find(x => x.DebutPeriode.ToString().Contains("24"));
+                    retour += tarif.Montant * (duree - 24) / tarif.Coeff;
+                }
+            }
+
+            if (p.Nom == "Gare-Sud") {
+                if (e.Duree < 24)
+                {
+                    if (horaire.Hour > 9 && (horaire.Hour + duree) < 21)
+                    {
+                        if (duree < 2)
+                        {
+                            tarif = p.Tarifs.Find(x => x.DebutPeriode.ToString().Contains("0"));
+                            retour += tarif.Montant * duree / tarif.Coeff;
+                        }
+                        if (duree > 2 && duree<4)
+                        {
+                            tarif = p.Tarifs.Find(x => x.DebutPeriode.ToString().Contains("0"));
+                            retour += tarif.Montant * 2 / tarif.Coeff;
+                            tarif = p.Tarifs.Find(x => x.DebutPeriode.ToString().Contains("2"));
+                            retour += tarif.Montant * (duree - 2) / tarif.Coeff;
+                        }
+                        if (duree > 4)
+                        {
+                            tarif = p.Tarifs.Find(x => x.DebutPeriode.ToString().Contains("0"));
+                            retour += tarif.Montant * 2 / tarif.Coeff;
+                            tarif = p.Tarifs.Find(x => x.DebutPeriode.ToString().Contains("2"));
+                            retour += tarif.Montant * 2 / tarif.Coeff;
+                            tarif = p.Tarifs.Find(x => x.DebutPeriode.ToString().Contains("4"));
+                            retour += tarif.Montant * (duree - 2) / tarif.Coeff;
+                        }
+                    }
+                    if (horaire.Hour > 21 && (horaire.Hour + duree) < 31)
+                    {
+                        tarif = p.Tarifs.Find(x => x.DebutPeriode.ToString().Contains("-1"));
+                        retour += tarif.Montant * duree / tarif.Coeff;
+                    }
+                    if (horaire.Hour < 9 && (horaire.Hour + duree) < 21)
+                    {
+                        tarif = p.Tarifs.Find(x => x.DebutPeriode.ToString().Contains("-1"));
+                        retour += tarif.Montant * (9 - horaire.Hour) / tarif.Coeff;
+                        dureeRestante -= 9 - horaire.Hour;
+                        if (dureeRestante < 2)
+                        {
+                            tarif = p.Tarifs.Find(x => x.DebutPeriode.ToString().Contains("0"));
+                            retour += tarif.Montant * dureeRestante / tarif.Coeff;
+                        }
+                        if (dureeRestante > 2 && dureeRestante < 4)
+                        {
+                            tarif = p.Tarifs.Find(x => x.DebutPeriode.ToString().Contains("0"));
+                            retour += tarif.Montant * 2 / tarif.Coeff;
+                            tarif = p.Tarifs.Find(x => x.DebutPeriode.ToString().Contains("2"));
+                            retour += tarif.Montant * (dureeRestante - 2) / tarif.Coeff;
+                        }
+                        if (dureeRestante > 4)
+                        {
+                            tarif = p.Tarifs.Find(x => x.DebutPeriode.ToString().Contains("0"));
+                            retour += tarif.Montant * 2 / tarif.Coeff;
+                            tarif = p.Tarifs.Find(x => x.DebutPeriode.ToString().Contains("2"));
+                            retour += tarif.Montant * 2 / tarif.Coeff;
+                            tarif = p.Tarifs.Find(x => x.DebutPeriode.ToString().Contains("4"));
+                            retour += tarif.Montant * (dureeRestante - 2) / tarif.Coeff;
+                        }
+                    }
+                    if (horaire.Hour < 21 && (horaire.Hour + duree) < 31)
+                    {
+                        if (duree < 2)
+                        {
+                            tarif = p.Tarifs.Find(x => x.DebutPeriode.ToString().Contains("0"));
+                            retour += tarif.Montant * (21 - horaire.Hour) / tarif.Coeff;
+                        }
+                        if (duree > 2 && duree < 4)
+                        {
+                            tarif = p.Tarifs.Find(x => x.DebutPeriode.ToString().Contains("0"));
+                            retour += tarif.Montant * 2 / tarif.Coeff;
+                            tarif = p.Tarifs.Find(x => x.DebutPeriode.ToString().Contains("2"));
+                            retour += tarif.Montant * ((21 - horaire.Hour) - 2) / tarif.Coeff;
+                        }
+                        if (duree > 4)
+                        {
+                            tarif = p.Tarifs.Find(x => x.DebutPeriode.ToString().Contains("0"));
+                            retour += tarif.Montant * 2 / tarif.Coeff;
+                            tarif = p.Tarifs.Find(x => x.DebutPeriode.ToString().Contains("2"));
+                            retour += tarif.Montant * 2 / tarif.Coeff;
+                            tarif = p.Tarifs.Find(x => x.DebutPeriode.ToString().Contains("4"));
+                            retour += tarif.Montant * ((21 - horaire.Hour) - 2) / tarif.Coeff;
+                        }
+                        dureeRestante -= 21 - horaire.Hour;
+                        tarif = p.Tarifs.Find(x => x.DebutPeriode.ToString().Contains("-1"));
+                        retour += tarif.Montant * dureeRestante / tarif.Coeff;
+
+                    }
+                }
+                else
+                {
+                    tarif = p.Tarifs.Find(x => x.DebutPeriode.ToString().Contains("0"));
+                    retour += tarif.Montant * 2 / tarif.Coeff;
+                    tarif = p.Tarifs.Find(x => x.DebutPeriode.ToString().Contains("2"));
+                    retour += tarif.Montant * 2 / tarif.Coeff;
+                    tarif = p.Tarifs.Find(x => x.DebutPeriode.ToString().Contains("4"));
+                    retour += tarif.Montant * 10 / tarif.Coeff;
+                    tarif = p.Tarifs.Find(x => x.DebutPeriode.ToString().Contains("-1"));
+                    retour += tarif.Montant * 10 / tarif.Coeff;
+                    tarif = p.Tarifs.Find(x => x.DebutPeriode.ToString().Contains("24"));
+                    retour += tarif.Montant * (duree - 24) / tarif.Coeff;
+                }
             }
 
             return retour;

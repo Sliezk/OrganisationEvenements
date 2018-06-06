@@ -19,6 +19,8 @@
         @Html.DisplayFor(modelItem => item.Duree)
         <br />
         @Html.DisplayFor(modelItem => item.Theme.Nom)
+        <br />
+        @Html.ActionLink("Parking", "Description", new { id = item.ID })
     </div>
     }
     </div>

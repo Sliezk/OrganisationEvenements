@@ -105,6 +105,8 @@ namespace GestionEvenements.Models
             }
         }
 
+        public double Cout { get; set; }
+
         public static List<ParkingViewModel> GetAll()
         {
             List<ParkingViewModel> retour = new List<ParkingViewModel>();
@@ -132,6 +134,22 @@ namespace GestionEvenements.Models
             {
                 Parking p = new Parking() { ID = Guid.Empty, Lieu = "Default" };
                 retour = new ParkingViewModel(p);
+            }
+
+            return retour;
+        }
+
+        public static List<ParkingViewModel> GetNearest(Evenement e)
+        {
+            List<ParkingViewModel> retour = new List<ParkingViewModel>();
+
+
+            List<Parking> parkings = ServiceParking.GetNearests(e);
+            foreach (Parking p in parkings)
+            {
+                ParkingViewModel pvm = new ParkingViewModel(p);
+                pvm.Cout = ServiceParking.GetCost(e, p);
+                retour.Add(pvm);
             }
 
             return retour;
