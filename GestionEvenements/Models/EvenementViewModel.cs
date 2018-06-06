@@ -70,7 +70,7 @@ namespace GestionEvenements.Models
         {
             if (this.Metier.Theme == null)
             {
-                this.Metier.Theme = new Theme() { ID = this.ThemeID };
+                this.Metier.Theme = new Theme() { ID = this.ThemeID, Nom = ServiceTheme.Get(this.ThemeID).Nom };
             }
 
             if (this.ID == Guid.Empty)
@@ -111,7 +111,7 @@ namespace GestionEvenements.Models
             }
             else
             {
-                Evenement e = new Evenement() { ID = Guid.Empty, Nom = "Default", Lieu = "Default" };
+                Evenement e = new Evenement() { ID = Guid.Empty, Nom = "Default", Lieu = "Default", Date = DateTime.Now };
                 retour = new EvenementViewModel(e);
             }
 

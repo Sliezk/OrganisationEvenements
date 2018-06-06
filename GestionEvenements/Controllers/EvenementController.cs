@@ -129,10 +129,8 @@ namespace GestionEvenements.Controllers
                 EVM.Save();
                 return RedirectToAction("Index");
             }
-            catch (Exception e)
+            catch(Exception ex)
             {
-                Console.WriteLine(e.Message);
-                Console.ReadKey();
                 return View();
             }
         }

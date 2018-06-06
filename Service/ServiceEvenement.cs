@@ -50,6 +50,9 @@ namespace Service
         {
             using (BddContext context = new BddContext())
             {
+                
+                e.Theme = ServiceTheme.Get(e.Theme.ID, context);
+
                 context.Evenements.Add(e);
                 context.SaveChanges();
             }
