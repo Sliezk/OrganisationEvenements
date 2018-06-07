@@ -28,18 +28,29 @@ namespace GestionEvenements.Controllers
             Evenement e = ServiceEvenement.Get(ID);
             //ViewBag.Tarif = ;
       
-            return View(ParkingViewModel.GetNearest(e));
+            return PartialView(ParkingViewModel.GetNearest(e));
         }
 
         public ActionResult DetailsEvenement(Guid ID)
         {
 
-            return View(EvenementViewModel.Get(ID));
+            return PartialView(EvenementViewModel.Get(ID));
         }
 
-        public ActionResult Map()
+        public ActionResult Map(Guid ID)
         {
-            return View();
+            Evenement e = ServiceEvenement.Get(ID);
+            List<Parking> p = ServiceParking.GetNearests(e);
+            ViewBag.Adresse = e.Lieu;
+            for (int i = 0; i < 3; i++) {
+                String lg = p[i].Longitude.ToString().Replace(",", ".");
+                String lat = p[i].Latitude.ToString().Replace(",", ".");
+
+                ViewData.Add("long"+i, lg);
+                ViewData.Add("lat" + i, lat);
+                ViewData.Add("nom" + i, p[i].Nom.ToString().Replace("é", "e"));
+            }
+            return PartialView();
         }
     }
 }

@@ -10,11 +10,11 @@ namespace BoEvents
     {
         public Guid ID { get; set; }
 
-        public string Lieu { get; set; }
+        public String Lieu { get; set; }
 
-        public string Nom { get; set; }
+        public String Nom { get; set; }
 
-        public string Statut { get; set; }
+        public String Statut { get; set; }
 
         public int NbPlacesLibres { get; set; }
 

@@ -148,7 +148,9 @@ namespace GestionEvenements.Models
             foreach (Parking p in parkings)
             {
                 ParkingViewModel pvm = new ParkingViewModel(p);
-                pvm.Cout = ServiceParking.GetCost(e, p);
+                if (p.Tarifs!=null && p.Tarifs.Count>0) {
+                    pvm.Cout = ServiceParking.GetCost(e, p);
+                }              
                 retour.Add(pvm);
             }
 
