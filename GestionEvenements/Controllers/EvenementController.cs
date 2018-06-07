@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
@@ -17,21 +18,12 @@ namespace GestionEvenements.Controllers
         public ActionResult Index()
         {
             List<EvenementViewModel> listes = new List<EvenementViewModel>();
-            //List<Theme> listeThemes = new List<Theme>();
-
-
+            
             List<Evenement> evenements = ServiceEvenement.GetAll();
             foreach (Evenement ev in evenements)
             {
                 listes.Add(new EvenementViewModel(ev));
             }
-
-            //List<Theme> themes = ServiceTheme.GetAll();
-            //foreach (Theme th in themes)
-            //{
-            //    listeThemes.Add(th);
-            //}
-
             return View(listes);
         }
 
@@ -45,7 +37,6 @@ namespace GestionEvenements.Controllers
             {
                 listeThemes.Add(th);
             }
-
             return View(listeThemes);
         }
 
@@ -70,7 +61,7 @@ namespace GestionEvenements.Controllers
 
         // POST: Evenement/Edit/5
         [HttpPost]
-        public ActionResult Edit(ImageViewModel EVM)
+        public ActionResult Edit(EvenementViewModel EVM)
         {
             List<ImageViewModel> images = new List<ImageViewModel>();
 
@@ -87,18 +78,21 @@ namespace GestionEvenements.Controllers
                             var fileName = Path.GetFileName(fileI.FileName);
                             string code = Guid.NewGuid().ToString();
                             string fileName2 = code + "" + fileName;
-                            var path = Path.Combine(Server.MapPath("~/Content/Images/"), fileName);
+                            var path = Path.Combine(Server.MapPath("~/Content/Images/"), fileName2);
                             var pathBdd = "~/Content/Images/" + fileName2;
                             if (!System.IO.File.Exists(path))
                             {
                                 fileI.SaveAs(path);
+                                img.ID = Guid.NewGuid();
                                 img.Fichier = fileName;
+                                img.Path = pathBdd;
                                 images.Add(new ImageViewModel(img));
                             }
                         }
                     }
                 }
-                return View();
+                EVM.Save();
+                return RedirectToAction("Index");
             }
             catch (Exception ex)
             {
@@ -106,46 +100,31 @@ namespace GestionEvenements.Controllers
             }
         }
 
-
-        /*if (file.ContentLength > 0)
-        {
-            string _FileName = Path.GetFileName(file.FileName);
-            string code = Guid.NewGuid().ToString();
-            string _FileName2 = code + "" + _FileName;
-            string _path = Path.Combine(Server.MapPath("~/Content/Images/"), _FileName2);
-            file.SaveAs(_path);
-            string pathBdd = "~/Content/Images/" + _FileName2;
-            Image img = new Image() { ID = Guid.NewGuid(), Path = pathBdd };
-            ServiceImage.Insert(img);
-            EVM.Image = ServiceImage.Get(img.ID);
-            EVM.ImageID = img.ID;
-        }
-        EVM.Save();
-        return RedirectToAction("Index");
-    }
-    catch(Exception ex)
-    {
-        return View();
-    }
-}*/
-
         // GET: Evenement/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(Guid? id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            return View(EvenementViewModel.Get(id));
         }
 
         // POST: Evenement/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(EvenementViewModel EVM, FormCollection notUsed)
         {
             try
             {
-                // TODO: Add delete logic here
+                if (EVM == null)
+                {
+                    return HttpNotFound();
+                }
+                EVM.Delete(EVM.ID);
 
                 return RedirectToAction("Index");
             }
-            catch
+            catch (Exception ex)
             {
                 return View();
             }

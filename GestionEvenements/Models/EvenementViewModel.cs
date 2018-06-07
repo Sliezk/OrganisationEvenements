@@ -61,8 +61,8 @@ namespace GestionEvenements.Models
 
         public List<Image> Image
         {
-            get; //{ return this.Metier.Image; }
-            set; //{ Metier.Image = value; }
+            get { return this.Metier.Image; }
+            set { Metier.Image = value; }
         }
 
 
@@ -73,15 +73,16 @@ namespace GestionEvenements.Models
                 this.Metier.Theme = new Theme() { ID = this.ThemeID, Nom = ServiceTheme.Get(this.ThemeID).Nom };
             }
 
-            //if (this.Metier.Image == null)
-            //{
-            //    this.Metier.Image = new List<Image>();
-            //    foreach (Image image in this.Image)
-            //    {
-            //        Image img = new Image() { ID = image.ID, Path = ServiceImage.Get(image.ID).Path };
-            //        this.Metier.Image.Add(img);
-            //    }
-            //}
+            if (this.Metier.Image == null)
+            {
+                this.Metier.Image = new List<Image>();
+                foreach (Image image in this.Image)
+                {
+                    Image img = new Image() { ID = image.ID, Path = ServiceImage.Get(image.ID).Path };
+                    this.Metier.Image.Add(img);
+                    ServiceImage.Insert(image);
+                }
+            }
 
             if (this.ID == Guid.Empty)
             {
@@ -94,6 +95,12 @@ namespace GestionEvenements.Models
                 //update
                 ServiceEvenement.Update(this.Metier);
             }
+        }
+
+        public void Delete(Guid id)
+        {
+            this.Metier = ServiceEvenement.Get(id);
+            ServiceEvenement.Remove(this.Metier);
         }
 
         public static List<EvenementViewModel> GetAll()

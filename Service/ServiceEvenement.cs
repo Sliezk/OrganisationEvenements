@@ -79,5 +79,14 @@ namespace Service
                 context.SaveChanges();
             }
         }
+
+        public static void Remove(Evenement e)
+        {
+            Evenement ev = Get(e.ID);
+            
+            Remove(ev);
+
+            
+        }
     }
 }
