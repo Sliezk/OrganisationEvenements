@@ -13,7 +13,7 @@ namespace BoEvents
 
         }
 
-        public Evenement(Guid id, string nom, string lieu, DateTime date, int duree, Theme theme, string description, Image image) : this()
+        public Evenement(Guid id, string nom, string lieu, DateTime date, int duree, Theme theme, string description, List<Image> image) : this()
         {
             ID = id;
             Nom = nom;
@@ -41,9 +41,9 @@ namespace BoEvents
 
         public string Description { get; set; }
 
-        public Image Image { get; set; }
+        public List<Image> Image { get; set; }
 
-        public Guid ImageID { get; set; }
+        //public Guid ImageID { get; set; }
 
     }
 }

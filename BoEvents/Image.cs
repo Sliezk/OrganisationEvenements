@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BoEvents
 {
-    public class Image
+    public class Image : IEntityIdentifiable
     {
 
         public Image()
@@ -14,14 +14,16 @@ namespace BoEvents
 
         }
 
-        public Image(Guid id, string path)
+        public Image(Guid id, string path, string fichier)
         {
             ID = id;
             Path = path;
+            Fichier = fichier;
         }
 
         public Guid ID { get; set; }
         public string Path { get; set; }
+        public string Fichier { get; set; }
 
     }
 }

@@ -14,7 +14,6 @@ namespace Service
             using (BddContext context = new BddContext())
             {
                 retour = context.Images.ToList();
-
             }
             return retour;
         }

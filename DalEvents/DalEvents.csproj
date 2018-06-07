@@ -124,6 +124,14 @@
     <Compile Include="Migrations\201806061256470_migration1.Designer.cs">
       <DependentUpon>201806061256470_migration1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201806070958365_modifImage.cs" />
+    <Compile Include="Migrations\201806070958365_modifImage.Designer.cs">
+      <DependentUpon>201806070958365_modifImage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806071000310_renouvellementImages.cs" />
+    <Compile Include="Migrations\201806071000310_renouvellementImages.Designer.cs">
+      <DependentUpon>201806071000310_renouvellementImages.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -185,6 +193,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201806061256470_migration1.resx">
       <DependentUpon>201806061256470_migration1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806070958365_modifImage.resx">
+      <DependentUpon>201806070958365_modifImage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806071000310_renouvellementImages.resx">
+      <DependentUpon>201806071000310_renouvellementImages.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

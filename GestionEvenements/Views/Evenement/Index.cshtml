@@ -51,12 +51,6 @@
             @Html.DisplayFor(modelItem => item.Theme.Nom)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Image.ID)
-        </td>
-        <td>
             @Html.ActionLink("Modifier", "Edit", new { id = item.ID }) |
             @Html.ActionLink("Détails", "Details", new { id = item.ID })
         </td>

@@ -70,35 +70,64 @@ namespace GestionEvenements.Controllers
 
         // POST: Evenement/Edit/5
         [HttpPost]
-        public ActionResult Edit(EvenementViewModel EVM, HttpPostedFileBase file)
+        public ActionResult Edit(ImageViewModel EVM)
         {
+            List<ImageViewModel> images = new List<ImageViewModel>();
+
             try
             {
-                if (file.ContentLength > 0)
+                if (Request.Files.Count > 0)
                 {
-                    string _FileName = Path.GetFileName(file.FileName);
-                    string _path = Path.Combine(Server.MapPath("~/Content/Images/"), _FileName);
-                    file.SaveAs(_path);
-                    Image img = new Image() { ID = Guid.NewGuid(), Path = _path };
-                    ServiceImage.Insert(img);
-                    EVM.Image = ServiceImage.Get(img.ID);
-                    EVM.ImageID = img.ID;
+                    for (int i = 0; i < Request.Files.Count; i++)
+                    {
+                        Image img = new Image();
+                        var fileI = Request.Files[i];
+                        if (fileI != null && fileI.ContentLength > 0)
+                        {
+                            var fileName = Path.GetFileName(fileI.FileName);
+                            string code = Guid.NewGuid().ToString();
+                            string fileName2 = code + "" + fileName;
+                            var path = Path.Combine(Server.MapPath("~/Content/Images/"), fileName);
+                            var pathBdd = "~/Content/Images/" + fileName2;
+                            if (!System.IO.File.Exists(path))
+                            {
+                                fileI.SaveAs(path);
+                                img.Fichier = fileName;
+                                images.Add(new ImageViewModel(img));
+                            }
+                        }
+                    }
                 }
-
-                /*if (imageID != null && imageID.ContentLength > 0)
-                {
-                    EVM.Image = new Image() { ID = Guid.NewGuid(), CodeBinaire = new byte[imageID.ContentLength] };
-                    imageID.InputStream.Read(EVM.Image.CodeBinaire, 0, imageID.ContentLength);
-                }*/
-
-                EVM.Save();
-                return RedirectToAction("Index");
+                return View();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return View();
             }
         }
+
+
+        /*if (file.ContentLength > 0)
+        {
+            string _FileName = Path.GetFileName(file.FileName);
+            string code = Guid.NewGuid().ToString();
+            string _FileName2 = code + "" + _FileName;
+            string _path = Path.Combine(Server.MapPath("~/Content/Images/"), _FileName2);
+            file.SaveAs(_path);
+            string pathBdd = "~/Content/Images/" + _FileName2;
+            Image img = new Image() { ID = Guid.NewGuid(), Path = pathBdd };
+            ServiceImage.Insert(img);
+            EVM.Image = ServiceImage.Get(img.ID);
+            EVM.ImageID = img.ID;
+        }
+        EVM.Save();
+        return RedirectToAction("Index");
+    }
+    catch(Exception ex)
+    {
+        return View();
+    }
+}*/
 
         // GET: Evenement/Delete/5
         public ActionResult Delete(int id)

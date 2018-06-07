@@ -52,7 +52,9 @@ namespace Service
             {
                 
                 e.Theme = ServiceTheme.Get(e.Theme.ID, context);
-                e.Image = ServiceImage.Get(e.Image.ID, context);
+                //e.
+                //e.Image.Add
+                //e.Image = ServiceImage.Get(e.Image.ID, context);
 
                 context.Evenements.Add(e);
                 context.SaveChanges();
@@ -72,7 +74,7 @@ namespace Service
                 eExistant.Theme = tExistant;
                 eExistant.Date = e.Date;
                 eExistant.Description = e.Description;
-                eExistant.Image = e.Image;
+               // eExistant.Image = e.Image;
 
                 context.SaveChanges();
             }
