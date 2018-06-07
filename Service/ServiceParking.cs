@@ -51,7 +51,7 @@ namespace Service
             foreach (CsvTarifs record in records) {
                 //Récupération du tarif
                 List<Tarif> tarifs = new List<Tarif>();
-                if (record.Parking == "colombier" || record.Parking == "lice" || record.Parking == "hoche") {
+                if (record.Parking == "colombier" || record.Parking == "lices" || record.Parking == "hoche") {
                     for (int i = 0; i < 4; i++)
                     {
                         Tarif tarif = null;
@@ -206,6 +206,8 @@ namespace Service
 
             foreach (Parking p in parkings) {
                 Coordinates c2 = geo.Geocode(p.Lieu + " Rennes");
+                p.Longitude = c2.Longitude;
+                p.Latitude = c2.Latitude;
                 double distance = Distance.distance(c1.Latitude, c1.Longitude, c2.Latitude, c2.Longitude,'K');
                 distances.Add(p.Nom, distance);
             }
@@ -227,7 +229,7 @@ namespace Service
             DateTime horaire = e.Date;
             Tarif tarif;
 
-            if (p.Nom == "Colombier" || p.Nom == "Lice" || p.Nom == "Hoche")
+            if (p.Nom == "Colombier" || p.Nom == "Les Lices" || p.Nom == "Hoche")
             {
                 if (e.Duree < 24)
                 {
@@ -446,7 +448,7 @@ namespace Service
                             tarif = p.Tarifs.Find(x => x.DebutPeriode.ToString().Contains("0"));
                             retour += tarif.Montant * duree / tarif.Coeff;
                         }
-                        if (duree > 2 && duree<4)
+                        if (duree > 2 && duree<=4)
                         {
                             tarif = p.Tarifs.Find(x => x.DebutPeriode.ToString().Contains("0"));
                             retour += tarif.Montant * 2 / tarif.Coeff;
@@ -495,7 +497,7 @@ namespace Service
                             retour += tarif.Montant * (dureeRestante - 2) / tarif.Coeff;
                         }
                     }
-                    if (horaire.Hour < 21 && (horaire.Hour + duree) < 31)
+                    if (horaire.Hour < 21 && (horaire.Hour + duree) < 31 && (horaire.Hour + duree) >21)
                     {
                         if (duree < 2)
                         {
