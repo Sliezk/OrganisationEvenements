@@ -81,11 +81,6 @@ namespace GestionEvenements.Models
                 {
                     Image img = new Image() { ID = IVM.ID, Fichier = IVM.Fichier, Path = IVM.Path };
                     this.Metier.Image.Add(img);
-                    /*List<Image> listeImagesBdd = ServiceImage.GetAll();
-                    if (listeImagesBdd.Contains(img))
-                    {
-                        ServiceImage.Insert(img);
-                    }*/
                 }
             }
 

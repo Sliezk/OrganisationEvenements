@@ -51,8 +51,15 @@
             @Html.DisplayFor(modelItem => item.Theme.Nom)
         </td>
         <td>
+            @foreach(var img in item.Image)
+            {
+            <img src="@Url.Content(img.Path)" alt="Concert de Johnny"
+                  width="200" height="150"/>
+            }
+        </td>
+        <td>
             @Html.ActionLink("Modifier", "Edit", new { id = item.ID }) |
-            @Html.ActionLink("Détails", "Details", new { id = item.ID })
+            @Html.ActionLink("Détails", "Details", new { id = item.ID }) |
             @Html.ActionLink("Supprimer", "Delete", new { id = item.ID })
         </td>
     </tr>

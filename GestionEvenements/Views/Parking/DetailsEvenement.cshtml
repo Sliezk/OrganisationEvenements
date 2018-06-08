@@ -1,7 +1,7 @@
 ﻿@model GestionEvenements.Models.EvenementViewModel
 
-<div class="container border border-secondary">
-    <h4>Details de l'évènement</h4>
+<div class="container border border-secondary detailEvent">
+    <h4>@Html.DisplayFor(model => model.Nom)</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>

@@ -1,51 +1,63 @@
 ﻿@model IEnumerable<GestionEvenements.Models.ParkingViewModel>
 
-<div class="container border border-secondary">
+<div class="container border border-secondary listeP">
 
     <h4>Liste des parkings proches</h4>
     <hr />
 
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th scope="col">
-                    Parking
-                </th>
-                <th scope="col">
-                    Adresse
-                </th>
-                <th scope="col">
-                    Places restantes
-                </th>
-                <th scope="col">
-                    Total des places
-                </th>
-                <th scope="col">
-                    Coût estimé
-                </th>
-            </tr>
-        </thead>
-            @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Nom)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Lieu)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.NbPlacesLibres)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Capacite)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Cout) €
-                </td>
-            </tr>
+    @foreach(var item in Model)
+    {
+        <div class="card">
+            <div class="card-header red">Parking @Html.DisplayFor(modelItem => item.Nom)</div>
+            <div class="card-text">
+                <p>Adresse : @Html.DisplayFor(modelItem => item.Lieu)</p>
+                <p>Places restantes : @Html.DisplayFor(modelItem => item.NbPlacesLibres)/@Html.DisplayFor(modelItem => item.Capacite)</p>
+                <p>Tarif estimé : @Html.DisplayFor(modelItem => item.Cout) €</p>
+            </div>
+        </div>
     }
 
-    </table>
+    <!--<table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">
+                        Parking
+                    </th>
+                    <th scope="col">
+                        Adresse
+                    </th>
+                    <th scope="col">
+                        Places restantes
+                    </th>
+                    <th scope="col">
+                        Total des places
+                    </th>
+                    <th scope="col">
+                        Coût estimé
+                    </th>
+                </tr>
+            </thead>
+                foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        Html.DisplayFor(modelItem => item.Nom)
+                    </td>
+                    <td>
+                        Html.DisplayFor(modelItem => item.Lieu)
+                    </td>
+                    <td>
+                        Html.DisplayFor(modelItem => item.NbPlacesLibres)
+                    </td>
+                    <td>
+                        Html.DisplayFor(modelItem => item.Capacite)
+                    </td>
+                    <td>
+                        Html.DisplayFor(modelItem => item.Cout) €
+                    </td>
+                </tr>
+        }-->
 
-</div>
+        </table>
+
+    </div>

@@ -50,7 +50,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.Theme, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.DropDownList("ThemeID", new SelectList(ViewBag.ListeThemes, "ID", "Nom"), new { @class = "form-control" }) 
+            @Html.DropDownList("ThemeID", new SelectList(ViewBag.ListeThemes, "ID", "Nom"), new { @class = "form-control dropdowntheme" }) 
             @Html.ValidationMessageFor(model => model.Theme, "", new { @class = "text-danger" })
         </div>
     </div>

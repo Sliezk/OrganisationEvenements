@@ -4,55 +4,26 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
-
-<div>
-    <h4>Evenement</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Lieu)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Lieu)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Date)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Date)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Duree)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Duree)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Theme)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Theme.Nom)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-
-    </dl>
+<div class="row">
+    <div class="card col-md-5">
+        <h3 class="card-header">@Html.DisplayFor(model => model.Nom)</h3>
+        <div class="card-body">
+            <h5 class="card-title"><b>@Html.DisplayNameFor(model => model.Theme) : </b>@Html.DisplayFor(model => model.Theme.Nom)</h5>
+            <p class="card-text">
+                <b>@Html.DisplayNameFor(model => model.Lieu) :</b> @Html.DisplayFor(model => model.Lieu)<br />
+                <b>@Html.DisplayNameFor(model => model.Date) :</b> @Html.DisplayFor(model => model.Date)<br />
+                <b>@Html.DisplayNameFor(model => model.Duree) : </b>@Html.DisplayFor(model => model.Duree)h<br />
+                <b>@Html.DisplayNameFor(model => model.Description) : </b>@Html.DisplayFor(model => model.Description)
+            </p>
+            @Html.ActionLink("Modifier cet événement", "Edit", new { id = Model.ID }, new { @class = "btn btn-primary" })
+            @Html.ActionLink("Retourner à la liste", "Index", null, new { @class = "btn btn-primary" })
+        </div>
+    </div>
+    
+    <div class="col-md-6">
+        @foreach (var img in Model.Image)
+        {
+            <img src="@Url.Content(img.Path)" alt="Concert de Johnny" width="600" height="400"/>
+        }
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

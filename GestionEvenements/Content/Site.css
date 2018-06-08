@@ -30,3 +30,44 @@ textarea {
     height: 200px;
     display: inline-block;
 }
+
+.dropdowntheme {
+    height: 30px!important;
+}
+
+.navbar > .navbar-collapse > .navbar-item > a {
+    color: white!important;
+}
+
+.card:last-child {
+    margin-bottom: 10px;
+    border-radius: 0px 0px 10px 10px; 
+}
+
+.listeP {
+    width: auto!important;
+    margin-top: 30px;
+}
+
+.map {
+    width: auto !important;
+    margin-top: 30px;
+}
+
+.detailEvent {
+    width: auto !important;
+    margin-top: 30px;
+}
+
+.card-text {
+    padding: 10px;
+}
+
+.card-header:first-child {
+    background-color: blue !important;
+    color: #27e9e9 !important;
+}
+
+.card-header:first-child > :first-child {
+    border-radius: 10px;
+}

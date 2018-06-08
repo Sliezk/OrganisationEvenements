@@ -4,24 +4,27 @@
     ViewBag.Title = "ListerEvenements";
 }
 
-<h2>Liste des évènements</h2>
+<h2>Liste des événements</h2>
 <hr />
 <div class="container-fluid mt-4">
     <div class="row justify-content-left">
         @foreach (var item in Model)
         {
-            <div class="col-auto mb-3">
-                <div class="card bg-light mb-3" style="width: 18rem;">
-                    <img class="card-img-top" src=".../100px180/" alt="Card image cap">
+            <div class="col-auto col-md-3">
+                <div class="card bg-light">
+                    @foreach (var image in item.Image)
+                    {
+                        <img class="card-img-top" src="@Url.Content(image.Path)" alt="Card image cap">
+                    }
                     <div class="card-body">
-                        <h4 class="card-title">@Html.DisplayFor(modelItem => item.Nom)</h4>
-                        <h5 class="card-subtitle">Adresse</h5>
+                        <h4 class="card-title"><b>@Html.DisplayFor(modelItem => item.Nom)</b></h4>
+                        <h5 class="card-subtitle"><b>Adresse</b></h5>
                         <p class="card-text"> @Html.DisplayFor(modelItem => item.Lieu)</p>
-                        <h5 class="card-subtitle">Date</h5>
+                        <h5 class="card-subtitle"><b>Date</b></h5>
                         <p class="card-text">@Html.DisplayFor(modelItem => item.Date)</p>
-                        <h5 class="card-subtitle">Durée</h5>
+                        <h5 class="card-subtitle"><b>Durée</b></h5>
                         <p class="card-text"> @Html.DisplayFor(modelItem => item.Duree) h</p>
-                        <h5 class="card-subtitle">Theme</h5>
+                        <h5 class="card-subtitle"><b>Theme</b></h5>
                         <p class="card-text"> @Html.DisplayFor(modelItem => item.Theme.Nom)</p>
                     </div>
                 <div class="card-footer">
