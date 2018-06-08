@@ -35,7 +35,7 @@ namespace GestionEvenements.Controllers
         public ActionResult DetailsEvenement(Guid ID)
         {
 
-            return PartialView(EvenementViewModel.Get(ID));
+            return PartialView(EvenementViewModel.GetAll().FirstOrDefault(e => e.ID == ID));
         }
 
         public ActionResult Map(Guid ID)
