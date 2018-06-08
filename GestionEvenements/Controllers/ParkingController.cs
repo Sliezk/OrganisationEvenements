@@ -16,9 +16,10 @@ namespace GestionEvenements.Controllers
             return View(EvenementViewModel.GetAll());
         }
 
-        public ActionResult Description(Guid ID)
+        public ActionResult Description(Guid ID, String nom)
         {
             ViewBag.ID = ID;
+            ViewBag.Nom = nom;
             return View();
         }
 
