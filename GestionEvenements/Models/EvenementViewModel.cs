@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using Service;
+using GestionEvenements.Controllers;
 
 namespace GestionEvenements.Models
 {
@@ -66,7 +67,7 @@ namespace GestionEvenements.Models
         }
 
 
-        public void Save()
+        public void Save(List<ImageViewModel> listeImg)
         {
             if (this.Metier.Theme == null)
             {
@@ -76,11 +77,15 @@ namespace GestionEvenements.Models
             if (this.Metier.Image == null)
             {
                 this.Metier.Image = new List<Image>();
-                foreach (Image image in this.Image)
+                foreach (ImageViewModel IVM in listeImg)
                 {
-                    Image img = new Image() { ID = image.ID, Path = ServiceImage.Get(image.ID).Path };
+                    Image img = new Image() { ID = IVM.ID, Fichier = IVM.Fichier, Path = IVM.Path };
                     this.Metier.Image.Add(img);
-                    ServiceImage.Insert(image);
+                    /*List<Image> listeImagesBdd = ServiceImage.GetAll();
+                    if (listeImagesBdd.Contains(img))
+                    {
+                        ServiceImage.Insert(img);
+                    }*/
                 }
             }
 
@@ -97,10 +102,9 @@ namespace GestionEvenements.Models
             }
         }
 
-        public void Delete(Guid id)
+        public void Delete(EvenementViewModel EVM)
         {
-            this.Metier = ServiceEvenement.Get(id);
-            ServiceEvenement.Remove(this.Metier);
+            ServiceEvenement.Remove(EVM.Metier);
         }
 
         public static List<EvenementViewModel> GetAll()

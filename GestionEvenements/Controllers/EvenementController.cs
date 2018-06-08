@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 
 namespace GestionEvenements.Controllers
@@ -91,7 +90,7 @@ namespace GestionEvenements.Controllers
                         }
                     }
                 }
-                EVM.Save();
+                EVM.Save(images);
                 return RedirectToAction("Index");
             }
             catch (Exception ex)
@@ -112,7 +111,7 @@ namespace GestionEvenements.Controllers
 
         // POST: Evenement/Delete/5
         [HttpPost]
-        public ActionResult Delete(EvenementViewModel EVM, FormCollection notUsed)
+        public ActionResult Delete(EvenementViewModel EVM)
         {
             try
             {
@@ -120,7 +119,7 @@ namespace GestionEvenements.Controllers
                 {
                     return HttpNotFound();
                 }
-                EVM.Delete(EVM.ID);
+                EVM.Delete(EVM);
 
                 return RedirectToAction("Index");
             }

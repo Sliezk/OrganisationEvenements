@@ -40,6 +40,13 @@ namespace Service
             return retour;
         }
 
+        public static Evenement GetWithContext(Guid id, BddContext context)
+        {
+            Evenement retour = null;
+            retour = context.Evenements.Include("Theme").Include("Image").FirstOrDefault(e => e.ID == id);
+            return retour;
+        }
+
         //surcharge, on la met en private car utilisée uniquement par le service
         private static Evenement Get(Guid id, BddContext context)
         {
@@ -82,11 +89,11 @@ namespace Service
 
         public static void Remove(Evenement e)
         {
-            Evenement ev = Get(e.ID);
-            
-            Remove(ev);
-
-            
+            using (BddContext context = new BddContext())
+            {
+                context.Evenements.Remove(Get(e.ID, context));
+                context.SaveChanges();
+            }
         }
     }
 }
