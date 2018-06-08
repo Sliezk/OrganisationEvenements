@@ -16,9 +16,10 @@ namespace GestionEvenements.Controllers
             return View(EvenementViewModel.GetAll());
         }
 
-        public ActionResult Description(Guid ID)
+        public ActionResult Description(Guid ID, String nom)
         {
             ViewBag.ID = ID;
+            ViewBag.Nom = nom;
             return View();
         }
 
@@ -34,7 +35,7 @@ namespace GestionEvenements.Controllers
         public ActionResult DetailsEvenement(Guid ID)
         {
 
-            return PartialView(EvenementViewModel.Get(ID));
+            return PartialView(EvenementViewModel.GetAll().FirstOrDefault(e => e.ID == ID));
         }
 
         public ActionResult Map(Guid ID)

@@ -3,7 +3,9 @@
     ViewBag.Title = "Description";
 }
 
-<h2>Description de l'évènement</h2>
+<h2>Evenement : @ViewBag.Nom</h2>
+
+<br />
 
 @Html.Action("DetailsEvenement", new { ID = @ViewBag.ID })
 

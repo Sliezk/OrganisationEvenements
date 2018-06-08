@@ -7,7 +7,7 @@
 
         var rennes = { lat: 48.117266, lng: -1.6777925999999752 };
         var map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 4,
+            zoom: 12,
             center: rennes
         });
 
@@ -58,15 +58,23 @@
 </script>
 
 
-<div id="destinationForm">
-    <form action="" method="get" name="direction" id="direction">
-        <label>Point de départ :</label>
-        <input type="text" name="origin" id="origin">
-        <input type="hidden" name="destination" id="destination" value="@ViewBag.Adresse">
-        <input type="button" value="Valider" onclick="calculate()">
-    </form>
+<div class="container border border-secondary">
 
+    <h4>Carte</h4>
+    <hr />
+
+    <div id="destinationForm">
+        <form action="" method="get" name="direction" id="direction">
+            <div class="form-group">
+                <label for="origin">Point de départ :</label>
+                <input type="text" class="form-control" name="origin" id="origin" placeholder="Veuillez rentrer l'adresse de départ">
+            </div>
+            <input type="hidden" name="destination" id="destination" value="@ViewBag.Adresse">
+            <input class="btn btn-primary" type="button" value="Valider" onclick="calculate()">
+        </form>
+
+    </div>
+    <br />
+    <div id="map" style="width:100%; height:500px; border: 5px solid #5E5454;"></div>
+    <br />
 </div>
-
-<div id="map" style="width:100%; height:500px; border: 5px solid #5E5454;"></div>
-

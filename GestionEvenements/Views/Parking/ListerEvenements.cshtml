@@ -5,61 +5,30 @@
 }
 
 <h2>Liste des évènements</h2>
-
-<div class="events">
-    @foreach (var item in Model)
-    {
-    <div class="event col-md-4">
-        @Html.ActionLink("" + @Html.DisplayFor(modelItem => item.Nom) + "", "Details", new { id = item.ID })
-        <br />
-        @Html.DisplayFor(modelItem => item.Lieu)
-        <br />
-        @Html.DisplayFor(modelItem => item.Date)
-        <br />
-        @Html.DisplayFor(modelItem => item.Duree)
-        <br />
-        @Html.DisplayFor(modelItem => item.Theme.Nom)
-        <br />
-        @Html.ActionLink("Details", "Description", new { id = item.ID })
-    </div>
-    }
-    </div>
-
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Lieu)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Date)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Duree)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Theme.Nom)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Lieu)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Date)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Duree)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Theme)
-        </td>
-        <td>
-            @Html.ActionLink("Details", "Details", new { id=item.ID })
-        </td>
-    </tr>
-}
-
-</table>
+<hr />
+<div class="container-fluid mt-4">
+    <div class="row justify-content-left">
+        @foreach (var item in Model)
+        {
+            <div class="col-auto mb-3">
+                <div class="card bg-light mb-3" style="width: 18rem;">
+                    <img class="card-img-top" src=".../100px180/" alt="Card image cap">
+                    <div class="card-body">
+                        <h4 class="card-title">@Html.DisplayFor(modelItem => item.Nom)</h4>
+                        <h5 class="card-subtitle">Adresse</h5>
+                        <p class="card-text"> @Html.DisplayFor(modelItem => item.Lieu)</p>
+                        <h5 class="card-subtitle">Date</h5>
+                        <p class="card-text">@Html.DisplayFor(modelItem => item.Date)</p>
+                        <h5 class="card-subtitle">Durée</h5>
+                        <p class="card-text"> @Html.DisplayFor(modelItem => item.Duree) h</p>
+                        <h5 class="card-subtitle">Theme</h5>
+                        <p class="card-text"> @Html.DisplayFor(modelItem => item.Theme.Nom)</p>
+                    </div>
+                <div class="card-footer">
+                    @Html.ActionLink("Details", "Description", new { id = item.ID, nom = item.Nom })
+                </div>
+            </div>
+            </div>
+         }
+   </div>
+</div>
