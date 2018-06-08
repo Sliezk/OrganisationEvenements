@@ -5,24 +5,23 @@
 }
 
 <h2>Liste des évènements</h2>
-
+<hr />
 <div class="container-fluid mt-4">
     <div class="row justify-content-left">
         @foreach (var item in Model)
         {
             <div class="col-auto mb-3">
-                <div class="card text-white bg-secondary mb-3" style="width: 18rem;">
+                <div class="card bg-light mb-3" style="width: 18rem;">
                     <img class="card-img-top" src=".../100px180/" alt="Card image cap">
                     <div class="card-body">
-                        <h5 class="card-title">@Html.DisplayFor(modelItem => item.Nom)</h5>
-                        <br/>
-                        <h6 class="card-subtitle">Adresse</h6>
+                        <h4 class="card-title">@Html.DisplayFor(modelItem => item.Nom)</h4>
+                        <h5 class="card-subtitle">Adresse</h5>
                         <p class="card-text"> @Html.DisplayFor(modelItem => item.Lieu)</p>
-                        <h6 class="card-subtitle">Date</h6>
+                        <h5 class="card-subtitle">Date</h5>
                         <p class="card-text">@Html.DisplayFor(modelItem => item.Date)</p>
-                        <h6 class="card-subtitle">Durée</h6>
+                        <h5 class="card-subtitle">Durée</h5>
                         <p class="card-text"> @Html.DisplayFor(modelItem => item.Duree) h</p>
-                        <h6 class="card-subtitle">Theme</h6>
+                        <h5 class="card-subtitle">Theme</h5>
                         <p class="card-text"> @Html.DisplayFor(modelItem => item.Theme.Nom)</p>
                     </div>
                 <div class="card-footer">
